@@ -1,7 +1,8 @@
 # Ticket #3 QA: check Agent access from the WordPress settings page
 
-Tested commits: the PR head (recorded in the PR description) re-ran the full checklist; the first
-pass ran against 3ce52fd plus the working tree that became df83e10. Environment: WordPress
+Tested commits: round 1 ran against 3ce52fd plus the working tree that became df83e10 and re-ran at
+fcc2b29. Round 2 (review corrections) ran the full checklist below, including the new section, against
+the ZIP built from b23cee1; the PR head adds only this document and the PR text. Environment: WordPress
 Playground CLI 3.1.52 (WASM PHP 8.1, WordPress 7.1, SQLite), port 18843, synthetic site
 "Andy Chat QA (synthetic)", synthetic embed id `qa0synthetic0embed0id0000000000a`. No production
 site, no Andy account and no real Agent were touched. No chat message was sent. The only requests that
@@ -95,16 +96,56 @@ Feature: Check Agent access from the WordPress settings page
       "Comprobando … desde http://127.0.0.1:18843…", and the live/success/404/500/network/invalid
       notices render in Spanish (see the transcript below)
 
-  Scenario: Accessibility                                                                        PASS
-    Then the result region is <div role="status" aria-live="polite"> and gets aria-busy="true"
-      while a check runs; the trigger is a native <button type="button">; notices carry their
-      meaning in text ("Success:", "Could not reach…"), not only in colour
+  Scenario: Accessibility (round 2)                                                              PASS
+    Then #andy-chat-access-result is a permanent visible <div role="status" aria-live="polite">
+      with no hidden and no aria-busy attribute, empty until a check runs, and every notice is
+      inserted inside it as a child .notice element; the trigger is a native <button type="button">;
+      notices carry their meaning in text ("Success:", "Could not reach…"), not only in colour
 
   Scenario: No proxy, no new endpoint, no telemetry, no entitlement gate                          PASS
     Then the only URL the script requests is ANDY_CHAT_API_URL + "/chatbot/<id>" (the endpoint the
       widget itself uses); no PHP handler, REST route or AJAX action was added; saving the synthetic
       id with the widget on succeeded ("Settings saved. The Andy widget is on for every public page.")
       without any Andy request from the server
+
+  Scenario: Success speaks only for the tested origin (round 2, required 1)                     PASS
+    Given a synthetic mu-plugin makes home_url() report https://qa-public.example while wp-admin
+      runs on http://127.0.0.1:18843 (config.siteOrigin = https://qa-public.example)
+    When a controlled 200 lands
+    Then "Success: Andy answered from http://127.0.0.1:18843 … so that origin is allowed to load it.
+      Chats still need an active Andy plan. Visitors load the widget from https://qa-public.example,
+      which this check did not test. If the Agent restricts Allowed Origins, that origin must be on
+      the list too."
+    And the blocked notice ends with "Visitors use https://qa-public.example, so add that origin as well."
+    And with matching origins (round 1 runtime) neither sentence appears
+
+  Scenario: Script failures are not called CORS failures (round 2, required 2)                  PASS
+    Given fetch resolves with a response whose json() throws synchronously
+    Or resolves with a chatbot whose name getter throws inside the render step
+    Then "The check failed inside this plugin before it could judge Andy's answer. Reload the page
+      and try again. This says nothing about Allowed Origins.", the button is enabled again
+    And the request log holds one cors request and no no-cors probe for either case
+    Given a 200 whose body is not JSON ("<html>")
+    Then it is judged by its status: the "HTTP 200 instead of the Agent's configuration" error,
+      no probe
+
+  Scenario: The whole check is bounded to 15 seconds (round 2, required 3)                      PASS
+    Given the CORS fetch never settles
+    Then after 15004 ms: "Andy did not answer within 15 seconds, so the check was stopped. Try
+      again. If it keeps happening, check your connection or a content blocker. This says nothing
+      about Allowed Origins.", button enabled, the fetch's AbortSignal is aborted, no no-cors probe
+    When the stalled fetch later resolves with a success body
+    Then the timeout notice stays
+    Given the body read (response.json()) never settles          Then timeout at 15005 ms, no probe
+    Given the CORS fetch rejects and the no-cors probe never settles
+    Then timeout at 15002 ms; request log "cors,no-cors" and nothing after it
+
+  Scenario: Editing or re-clicking cancels the run in flight (round 2)                          PASS
+    Given a check is in flight and the administrator types in the id field
+    Then the region is emptied, the button is enabled, the in-flight signal is aborted, no probe
+      runs, and a new click completes normally (one new cors request, success notice)
+    Given click 1 is in flight and click 2 for another id answers 404 first
+    Then the 404 for the second id shows; when click 1's success lands later it is dropped
 
   Scenario: Fully rendered bubble from a controlled realistic public config (not live proof)      PASS
     Given the home page with the widget on (real https://app.andypartner.com/widget.js, 95502 bytes)
@@ -128,7 +169,24 @@ Feature: Check Agent access from the WordPress settings page
     CI runs PHP lint, catalog regeneration and diff, ZIP build, unpack and Plugin Check on the ZIP.
 ```
 
-## Spanish transcript (controlled and live, site language es_ES)
+## Spanish transcript (controlled and live, site language es_ES, round 2 at b23cee1)
+
+```
+live  : notice-warning  … añade http://127.0.0.1:18843 y vuelve a comprobar. Los visitantes usan
+        https://qa-public.example, así que añade también ese origen.
+200   : notice-success  Correcto: Andy respondió desde http://127.0.0.1:18843 con la configuración del
+        Agente "Agente QA (sintético)", así que ese origen tiene permiso para cargarlo. Los chats
+        siguen necesitando un plan activo de Andy. Los visitantes cargan el widget desde
+        https://qa-public.example, origen que esta comprobación no probó. Si el Agente restringe los
+        Orígenes Permitidos, ese origen también debe estar en la lista.
+stall : notice-error    Andy no respondió en 15 segundos, así que la comprobación se detuvo. Inténtalo
+        de nuevo. Si se repite, revisa tu conexión o un bloqueador de contenido. Esto no dice nada
+        sobre los Orígenes Permitidos.
+bug   : notice-error    La comprobación falló dentro de este plugin antes de poder evaluar la respuesta
+        de Andy. Recarga la página e inténtalo de nuevo. Esto no dice nada sobre los Orígenes Permitidos.
+```
+
+Round 1 transcript (site language es_ES, matching origins):
 
 ```
 live  : notice-warning  Andy respondió, pero no dejó que este navegador leyera la respuesta. Eso ocurre
@@ -154,7 +212,6 @@ net   : notice-error    No se pudo conectar con app.andypartner.com desde este n
 - No authorized public test Agent exists, so the success and readable-404 paths were exercised with
   controlled responses only. The live path proves the opaque 403 and the no-cors probe against the
   real service. First real-Agent proof stays an open integration gap.
-- The check runs from the wp-admin origin. When `home_url()` differs from the admin origin the copy
-  adds "Visitors use <origin>, so add that origin as well."; that branch was read, not exercised,
-  because Playground serves both from one origin.
+- The check runs from the wp-admin origin and only speaks for it. The differing public origin was
+  produced by a synthetic mu-plugin filtering `home_url()`, not by a real split-host install.
 - Playground runs PHP in WASM with SQLite; CI's Plugin Check runs in wp-env with MySQL.
