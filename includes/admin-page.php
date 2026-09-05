@@ -197,8 +197,8 @@ function andy_chat_render_embed_id_field(): void {
 function andy_chat_render_access_field(): void {
 	?>
 	<button type="button" id="andy-chat-check-access" class="button button-secondary"><?php esc_html_e( 'Check access from this site', 'andy-chat' ); ?></button>
-	<p class="description"><?php esc_html_e( 'Asks Andy for the public configuration of the embed id above, from this browser, so the answer reflects this site\'s origin. Nothing is saved and no message is sent.', 'andy-chat' ); ?></p>
-	<div id="andy-chat-access-result" role="status" aria-live="polite" hidden></div>
+	<p class="description"><?php esc_html_e( 'Asks Andy for the public configuration of the embed id above, from this browser, so the answer reflects the origin of this page. Nothing is saved and no message is sent.', 'andy-chat' ); ?></p>
+	<div id="andy-chat-access-result" role="status" aria-live="polite"></div>
 	<?php
 }
 
@@ -232,7 +232,9 @@ function andy_chat_enqueue_settings_assets( string $hook_suffix ): void {
 			/* translators: 1: embed id, 2: this site's origin, for example https://example.com */
 			'checking'          => __( 'Checking %1$s from %2$s…', 'andy-chat' ),
 			/* translators: 1: Agent name, 2: this site's origin, for example https://example.com */
-			'success'           => __( 'Success: Andy answered from %2$s with the configuration of the Agent "%1$s", so this site is allowed to load it. Chats still need an active Andy plan.', 'andy-chat' ),
+			'success'           => __( 'Success: Andy answered from %2$s with the configuration of the Agent "%1$s", so that origin is allowed to load it. Chats still need an active Andy plan.', 'andy-chat' ),
+			/* translators: %s: the public site's origin, for example https://example.com */
+			'successOtherOrigin' => __( 'Visitors load the widget from %s, which this check did not test. If the Agent restricts Allowed Origins, that origin must be on the list too.', 'andy-chat' ),
 			/* translators: %s: embed id */
 			'notFound'          => __( 'Andy answered that no Agent with embed id %s exists. Copy the id again from the Installation tab of your Agent.', 'andy-chat' ),
 			/* translators: %s: HTTP status code */
@@ -243,6 +245,9 @@ function andy_chat_enqueue_settings_assets( string $hook_suffix ): void {
 			/* translators: %s: the public site's origin, for example https://example.com */
 			'siteOriginDiffers' => __( 'Visitors use %s, so add that origin as well.', 'andy-chat' ),
 			'network'           => __( 'Could not reach app.andypartner.com from this browser. Check your internet connection or a content blocker. This says nothing about Allowed Origins.', 'andy-chat' ),
+			/* translators: %s: number of seconds waited */
+			'timeout'           => __( 'Andy did not answer within %s seconds, so the check was stopped. Try again. If it keeps happening, check your connection or a content blocker. This says nothing about Allowed Origins.', 'andy-chat' ),
+			'internal'          => __( 'The check failed inside this plugin before it could judge Andy\'s answer. Reload the page and try again. This says nothing about Allowed Origins.', 'andy-chat' ),
 		),
 	);
 

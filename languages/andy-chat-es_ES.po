@@ -121,8 +121,8 @@ msgstr "Comprobar acceso"
 msgid "Check access from this site"
 msgstr "Comprobar el acceso desde este sitio"
 
-msgid "Asks Andy for the public configuration of the embed id above, from this browser, so the answer reflects this site's origin. Nothing is saved and no message is sent."
-msgstr "Pide a Andy la configuración pública del embed id de arriba, desde este navegador, para que la respuesta refleje el origen de este sitio. No se guarda nada ni se envía ningún mensaje."
+msgid "Asks Andy for the public configuration of the embed id above, from this browser, so the answer reflects the origin of this page. Nothing is saved and no message is sent."
+msgstr "Pide a Andy la configuración pública del embed id de arriba, desde este navegador, para que la respuesta refleje el origen de esta página. No se guarda nada ni se envía ningún mensaje."
 
 msgid "Enter a valid embed id before checking: letters, digits, hyphens and underscores only."
 msgstr "Introduce un embed id válido antes de comprobar: solo letras, dígitos, guiones y guiones bajos."
@@ -134,8 +134,13 @@ msgstr "Comprobando %1$s desde %2$s…"
 
 #. translators: 1: Agent name, 2: this site's origin, for example https://example.com
 #, php-format
-msgid "Success: Andy answered from %2$s with the configuration of the Agent \"%1$s\", so this site is allowed to load it. Chats still need an active Andy plan."
-msgstr "Correcto: Andy respondió desde %2$s con la configuración del Agente \"%1$s\", así que este sitio tiene permiso para cargarlo. Los chats siguen necesitando un plan activo de Andy."
+msgid "Success: Andy answered from %2$s with the configuration of the Agent \"%1$s\", so that origin is allowed to load it. Chats still need an active Andy plan."
+msgstr "Correcto: Andy respondió desde %2$s con la configuración del Agente \"%1$s\", así que ese origen tiene permiso para cargarlo. Los chats siguen necesitando un plan activo de Andy."
+
+#. translators: %s: the public site's origin, for example https://example.com
+#, php-format
+msgid "Visitors load the widget from %s, which this check did not test. If the Agent restricts Allowed Origins, that origin must be on the list too."
+msgstr "Los visitantes cargan el widget desde %s, origen que esta comprobación no probó. Si el Agente restringe los Orígenes Permitidos, ese origen también debe estar en la lista."
 
 #. translators: %s: embed id
 #, php-format
@@ -162,6 +167,14 @@ msgstr "Los visitantes usan %s, así que añade también ese origen."
 
 msgid "Could not reach app.andypartner.com from this browser. Check your internet connection or a content blocker. This says nothing about Allowed Origins."
 msgstr "No se pudo conectar con app.andypartner.com desde este navegador. Revisa tu conexión a internet o un bloqueador de contenido. Esto no dice nada sobre los Orígenes Permitidos."
+
+#. translators: %s: number of seconds waited
+#, php-format
+msgid "Andy did not answer within %s seconds, so the check was stopped. Try again. If it keeps happening, check your connection or a content blocker. This says nothing about Allowed Origins."
+msgstr "Andy no respondió en %s segundos, así que la comprobación se detuvo. Inténtalo de nuevo. Si se repite, revisa tu conexión o un bloqueador de contenido. Esto no dice nada sobre los Orígenes Permitidos."
+
+msgid "The check failed inside this plugin before it could judge Andy's answer. Reload the page and try again. This says nothing about Allowed Origins."
+msgstr "La comprobación falló dentro de este plugin antes de poder evaluar la respuesta de Andy. Recarga la página e inténtalo de nuevo. Esto no dice nada sobre los Orígenes Permitidos."
 
 msgid "Show the Andy widget on every public page"
 msgstr "Mostrar el widget de Andy en todas las páginas públicas"

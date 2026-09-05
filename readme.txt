@@ -37,7 +37,7 @@ Policies: [privacy policy](https://andypartner.com/legal/privacy), [terms of ser
 2. Activate Andy Chat. Activation alone loads nothing from Andy.
 3. Open Settings → Andy Chat and read the disclosure.
 4. In the Andy App open your Agent, go to Installation, pick the HTML / Vanilla JavaScript tab and copy the value assigned to `ANDY_CHATBOT_ID`. That is the embed id.
-5. Paste the embed id and click "Check access from this site". The check asks Andy for the Agent's public configuration from your browser, so it sees the same origin your visitors use. It sends no message.
+5. Paste the embed id and click "Check access from this site". The check asks Andy for the Agent's public configuration from your browser, using the origin of the admin page you are on. When your public site uses a different address, the result says so, because that origin is not tested. It sends no message.
 6. Tick "Show the Andy widget on every public page" and save.
 
 If your Agent restricts Allowed Origins in Andy, add your site's origin (for example `https://example.com`) to that list, otherwise the widget cannot load its configuration. The access check tells you when that is the likely cause and which origin to add.
@@ -58,7 +58,7 @@ Not in this version. The widget is either on for every public page or off.
 
 = The access check says Andy did not let the browser read the reply. What now? =
 
-Andy gives the same answer for an unknown embed id and for a site outside the Agent's Allowed Origins, and the browser cannot tell them apart. First compare the embed id with the Installation tab in the Andy App. If it matches, open the Agent's Settings → Security → Allowed Origins and add the origin shown in the message. A successful check confirms the site can load the Agent; chats still need an active Andy plan.
+Andy gives the same answer for an unknown embed id and for a site outside the Agent's Allowed Origins, and the browser cannot tell them apart. First compare the embed id with the Installation tab in the Andy App. If it matches, open the Agent's Settings → Security → Allowed Origins and add the origin shown in the message. A successful check confirms that the origin it ran from can load the Agent; chats still need an active Andy plan.
 
 = What happens when I deactivate the plugin? =
 
