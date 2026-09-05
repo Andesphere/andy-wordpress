@@ -68,6 +68,14 @@ function andy_chat_add_settings_fields(): void {
 	);
 
 	add_settings_field(
+		'andy_chat_access',
+		__( 'Access check', 'andy-chat' ),
+		'andy_chat_render_access_field',
+		ANDY_CHAT_PAGE_SLUG,
+		'andy_chat_connection'
+	);
+
+	add_settings_field(
 		'andy_chat_enabled',
 		__( 'Widget', 'andy-chat' ),
 		'andy_chat_render_enabled_field',
@@ -179,6 +187,77 @@ function andy_chat_render_embed_id_field(): void {
 	<p class="description"><?php esc_html_e( 'Letters, digits, hyphens and underscores only. Example: k2f9x0w4d7mqzn1vp8yc3rh6t5ejab0g', 'andy-chat' ); ?></p>
 	<?php
 }
+
+/**
+ * "Check access" button and its live status region.
+ *
+ * The check runs in assets/access-check.js from the administrator's browser, so it carries the real
+ * site origin. It reads the Agent's public configuration only; it never sends a chat message.
+ */
+function andy_chat_render_access_field(): void {
+	?>
+	<button type="button" id="andy-chat-check-access" class="button button-secondary"><?php esc_html_e( 'Check access from this site', 'andy-chat' ); ?></button>
+	<p class="description"><?php esc_html_e( 'Asks Andy for the public configuration of the embed id above, from this browser, so the answer reflects the origin of this page. Nothing is saved and no message is sent.', 'andy-chat' ); ?></p>
+	<div id="andy-chat-access-result" role="status" aria-live="polite"></div>
+	<?php
+}
+
+/**
+ * Loads the access-check script on Settings → Andy Chat only, with its translated copy.
+ *
+ * Strings stay in PHP so the existing WP-CLI extraction covers them; the script substitutes %s itself
+ * because the origin and the embed id are only known in the browser.
+ *
+ * @param string $hook_suffix Current admin screen.
+ */
+function andy_chat_enqueue_settings_assets( string $hook_suffix ): void {
+	if ( 'settings_page_' . ANDY_CHAT_PAGE_SLUG !== $hook_suffix ) {
+		return;
+	}
+
+	wp_enqueue_script(
+		'andy-chat-access-check',
+		plugins_url( 'assets/access-check.js', ANDY_CHAT_FILE ),
+		array(),
+		ANDY_CHAT_VERSION,
+		array( 'in_footer' => true )
+	);
+
+	$config = array(
+		'endpoint'   => ANDY_CHAT_API_URL . '/chatbot/',
+		'siteOrigin' => andy_chat_site_origin(),
+		'pattern'    => trim( ANDY_CHAT_EMBED_ID_PATTERN, '/' ),
+		'text'       => array(
+			'invalidId'         => __( 'Enter a valid embed id before checking: letters, digits, hyphens and underscores only.', 'andy-chat' ),
+			/* translators: 1: embed id, 2: this site's origin, for example https://example.com */
+			'checking'          => __( 'Checking %1$s from %2$s…', 'andy-chat' ),
+			/* translators: 1: Agent name, 2: this site's origin, for example https://example.com */
+			'success'           => __( 'Success: Andy answered from %2$s with the configuration of the Agent "%1$s", so that origin is allowed to load it. Chats still need an active Andy plan.', 'andy-chat' ),
+			/* translators: %s: the public site's origin, for example https://example.com */
+			'successOtherOrigin' => __( 'Visitors load the widget from %s, which this check did not test. If the Agent restricts Allowed Origins, that origin must be on the list too.', 'andy-chat' ),
+			/* translators: %s: embed id */
+			'notFound'          => __( 'Andy answered that no Agent with embed id %s exists. Copy the id again from the Installation tab of your Agent.', 'andy-chat' ),
+			/* translators: %s: HTTP status code */
+			'unexpected'        => __( 'Andy answered with HTTP %s instead of the Agent\'s configuration. Try again in a few minutes. This is not an Allowed Origins problem.', 'andy-chat' ),
+			'blocked'           => __( 'Andy answered but did not let this browser read the reply. That happens when the embed id does not exist, or when the Agent restricts Allowed Origins and this site is not on the list.', 'andy-chat' ),
+			/* translators: %s: this site's origin, for example https://example.com */
+			'addOrigin'         => __( 'If the embed id matches the Andy App exactly, open your Agent in Andy, go to Settings → Security → Allowed Origins, add %s and check again.', 'andy-chat' ),
+			/* translators: %s: the public site's origin, for example https://example.com */
+			'siteOriginDiffers' => __( 'Visitors use %s, so add that origin as well.', 'andy-chat' ),
+			'network'           => __( 'Could not reach app.andypartner.com from this browser. Check your internet connection or a content blocker. This says nothing about Allowed Origins.', 'andy-chat' ),
+			/* translators: %s: number of seconds waited */
+			'timeout'           => __( 'Andy did not answer within %s seconds, so the check was stopped. Try again. If it keeps happening, check your connection or a content blocker. This says nothing about Allowed Origins.', 'andy-chat' ),
+			'internal'          => __( 'The check failed inside this plugin before it could judge Andy\'s answer. Reload the page and try again. This says nothing about Allowed Origins.', 'andy-chat' ),
+		),
+	);
+
+	wp_add_inline_script(
+		'andy-chat-access-check',
+		'window.andyChatAccess = ' . wp_json_encode( $config, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) . ';',
+		'before'
+	);
+}
+add_action( 'admin_enqueue_scripts', 'andy_chat_enqueue_settings_assets' );
 
 /**
  * Enabled checkbox.
