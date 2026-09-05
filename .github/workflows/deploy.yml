@@ -1,0 +1,73 @@
+# Publishes a tagged version to the WordPress.org plugin directory (SVN).
+#
+# Trigger: a pushed tag vMAJOR.MINOR.PATCH whose number equals the plugin's Version header, the
+# ANDY_CHAT_VERSION constant, the readme Stable tag and a readme changelog entry
+# (bin/check-release-version.sh).
+#
+# This workflow cannot publish until the directory has approved the andy-chat slug and Jorge has stored
+# the SVN credentials: bin/release-guard.sh fails the run unless the repository variable
+# WPORG_DEPLOY_APPROVED is "true" and the secrets SVN_USERNAME and SVN_PASSWORD exist. Before that,
+# pushing a version tag only builds and validates the ZIP; nothing reaches WordPress.org.
+# The initial submission is manual (docs/release.md). No manual trigger exists on purpose.
+name: Deploy to WordPress.org
+
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: wordpress-org-deploy
+  cancel-in-progress: false
+
+jobs:
+  package:
+    # Same lint, catalog, ZIP and Plugin Check steps as every push; uploads the ZIP as "andy-chat".
+    uses: ./.github/workflows/ci.yml
+
+  deploy:
+    name: Commit the validated package to WordPress.org SVN
+    needs: package
+    runs-on: ubuntu-latest
+    # The environment holds SVN_USERNAME and SVN_PASSWORD and may carry a required reviewer so every
+    # publication waits for a human click. GitHub creates it on first use.
+    environment: wordpress-org
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Release guard (directory approval and credentials)
+        env:
+          WPORG_DEPLOY_APPROVED: ${{ vars.WPORG_DEPLOY_APPROVED }}
+          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+        run: bin/release-guard.sh
+
+      - name: Tag equals plugin version, stable tag and changelog
+        run: bin/check-release-version.sh "$GITHUB_REF_NAME"
+
+      - name: Download the ZIP that Plugin Check validated
+        uses: actions/download-artifact@v4
+        with:
+          name: andy-chat
+          path: dist
+
+      - name: Unpack it as the deploy source
+        run: |
+          set -euo pipefail
+          sha256sum dist/andy-chat.zip
+          unzip -q dist/andy-chat.zip -d package
+          test -f package/andy-chat/andy-chat.php
+
+      # BUILD_DIR makes the action deploy exactly the unpacked ZIP; .distignore is not consulted again.
+      # The tag minus its "v" becomes the SVN tag, so tags/0.1.0 matches "Stable tag: 0.1.0".
+      # No .wordpress-org directory exists, so no listing assets are pushed.
+      - name: Deploy to WordPress.org SVN
+        uses: 10up/action-wordpress-plugin-deploy@54bd289b8525fd23a5c365ec369185f2966529c2 # 2.3.0
+        env:
+          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+          SLUG: andy-chat
+          BUILD_DIR: package/andy-chat
