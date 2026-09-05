@@ -66,7 +66,9 @@ modes, so the same commit produces the same SHA-256 locally and in CI regardless
 (verified at umask 022, 002 and 077). Compare the `sha256sum` line in the CI log with
 `shasum -a 256 dist/andy-chat.zip` at home. Because the timestamp is the HEAD commit's, a commit that
 touches only `bin/`, `docs/` or `.github/` changes the archive hash while the extracted files stay
-identical; `diff -r` of the two unpacked trees is the check in that case.
+identical; `diff -r` of the two unpacked trees is the check in that case. Compare against the
+`push` (or tag) run, not the `pull_request` run: the latter builds GitHub's temporary merge commit,
+whose timestamp is a few seconds later, so its hash differs while the files do not.
 
 CI runs on every push and pull request: PHP lint at 8.1, translation catalogs regenerated and diffed,
 version agreement, ZIP build, unpack, and `WordPress/plugin-check-action` against WordPress 7.1 on the

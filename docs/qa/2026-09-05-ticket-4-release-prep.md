@@ -36,6 +36,9 @@ Feature: Release candidate package
     And every directory entry is drwxr-xr-x and every file entry -rw-r--r--
     And the CI artifact of run 33982483244, downloaded and hashed, is the same value
     (Before the fix, review R1 measured three different hashes for the three umasks.)
+    And at the follow-up head the push-run artifact is byte-identical to the local build at all
+      three umasks, while the pull_request run's artifact differs only in the DOS timestamp of
+      GitHub's temporary merge commit; diff -r of the unpacked c7ee396 and follow-up trees is empty
 
   Scenario: Upload, activate, configure, load, disable, reactivate                              PASS
     Given a fresh Playground site
