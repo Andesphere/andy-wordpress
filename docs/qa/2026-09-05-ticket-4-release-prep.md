@@ -1,6 +1,12 @@
 # Ticket #4 QA: release candidate package and deploy guard (account-independent part)
 
-Tested commit: see the PR for the head; the ZIP hash below is for the commit named there. Environment:
+Tested commit: c7ee396 (PR #8 round 1) produced the release candidate,
+`dist/andy-chat.zip` SHA-256 `44405314366ebf14ab8124d7f5b8914f0bbaaf86af74e236b22fdc6116194ae9`,
+uploaded by CI run 33982483244 as artifact `andy-chat` and rebuilt locally with the same hash. The
+review follow-up commit on top of it (mode normalization in `bin/build-zip.sh`, this document and
+`docs/release.md`) changes no shipped file; its archive hash differs only because entries carry the
+HEAD commit time. The PR names that head and its CI hash, and a `diff -r` of the two unpacked trees is
+empty. Environment:
 WordPress Playground CLI 3.1.52 (WASM PHP 8.1, WordPress 7.1, SQLite), port 18844, synthetic site
 "Andy Chat RC QA (synthetic)", synthetic embed id `qa0synthetic0embed0id0000000000a`. No production
 site, no Andy account, no real Agent, no WordPress.org account and no SVN repository were touched. No
@@ -23,10 +29,13 @@ Feature: Release candidate package
     And it contains no .github, bin, docs, dotfiles or *.zip
     And grep for SVN_PASSWORD, api key, private key or password finds nothing
 
-  Scenario: Same commit, same bytes                                                              PASS
-    When the ZIP is built twice, once with TZ=Asia/Tokyo
-    Then both runs print the same SHA-256; entries carry the HEAD commit time in UTC
-    And CI prints sha256sum of its own build for comparison (see the PR)
+  Scenario: Same commit, same bytes (Info-ZIP zip 3.0 on macOS and ubuntu-latest)                PASS
+    Given the working tree at c7ee396 with the mode fix applied to bin/build-zip.sh
+    When the ZIP is built at umask 022, 002 and 077, and at umask 002 with TZ=Asia/Tokyo
+    Then all four runs print 44405314366ebf14ab8124d7f5b8914f0bbaaf86af74e236b22fdc6116194ae9
+    And every directory entry is drwxr-xr-x and every file entry -rw-r--r--
+    And the CI artifact of run 33982483244, downloaded and hashed, is the same value
+    (Before the fix, review R1 measured three different hashes for the three umasks.)
 
   Scenario: Upload, activate, configure, load, disable, reactivate                              PASS
     Given a fresh Playground site

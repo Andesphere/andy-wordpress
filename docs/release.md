@@ -60,9 +60,13 @@ Checked against primary sources on 2026-09-05:
 `bin/build-zip.sh` copies tracked files minus `.distignore` into `dist/andy-chat.zip`. The archive holds
 one `andy-chat/` folder with the plugin file, `includes/`, `assets/access-check.js`, `languages/`,
 `readme.txt`, `uninstall.php` and `LICENSE`. Kept out: `.github`, `bin`, `docs`, dotfiles, editor and
-package-manager files, and anything untracked. The build is reproducible: entries carry the HEAD
-commit time, so the same commit produces the same SHA-256 locally and in CI. Compare the
-`sha256sum` line in the CI log with `shasum -a 256 dist/andy-chat.zip` at home.
+package-manager files, and anything untracked. The build is reproducible with Info-ZIP zip 3.0, the
+`zip` on macOS and on `ubuntu-latest`: entries carry the HEAD commit time in UTC and fixed 755/644
+modes, so the same commit produces the same SHA-256 locally and in CI regardless of timezone or umask
+(verified at umask 022, 002 and 077). Compare the `sha256sum` line in the CI log with
+`shasum -a 256 dist/andy-chat.zip` at home. Because the timestamp is the HEAD commit's, a commit that
+touches only `bin/`, `docs/` or `.github/` changes the archive hash while the extracted files stay
+identical; `diff -r` of the two unpacked trees is the check in that case.
 
 CI runs on every push and pull request: PHP lint at 8.1, translation catalogs regenerated and diffed,
 version agreement, ZIP build, unpack, and `WordPress/plugin-check-action` against WordPress 7.1 on the
@@ -118,7 +122,11 @@ GitHub masks registered secrets in logs, so never enable `ACTIONS_STEP_DEBUG` on
      validated. The action commits to `trunk` and copies it to `tags/<version>` in one SVN commit.
      `.distignore` is not consulted again.
 5. There is no manual trigger and no way to skip the guard. A rehearsal without an SVN commit is
-   possible by opening a PR that adds `with: dry-run: true` to the deploy step, tagging, then reverting.
+   possible by opening a PR that adds `with: dry-run: true` to the deploy step, tagging, then
+   reverting. It is only possible after approval: the guard blocks the job first, and the action
+   checks out `https://plugins.svn.wordpress.org/andy-chat/` before it reads `dry-run`, which only
+   skips the final `svn commit`. So a rehearsal needs the approved slug, the stored credentials and
+   `WPORG_DEPLOY_APPROVED=true`, exactly like a real release.
 
 Smoke, after the run goes green:
 
