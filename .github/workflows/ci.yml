@@ -21,6 +21,9 @@ jobs:
           php-version: '8.1'
           coverage: none
 
+      - name: Version header, constant, stable tag and changelog agree
+        run: bin/check-release-version.sh
+
       - name: PHP syntax check
         run: |
           set -euo pipefail
@@ -82,6 +85,8 @@ jobs:
           test -f package/andy-chat/readme.txt
           test ! -e package/andy-chat/.github
           test ! -e package/andy-chat/bin
+          test ! -e package/andy-chat/docs
+          sha256sum dist/andy-chat.zip
 
       - name: Plugin Check on the packaged plugin
         uses: WordPress/plugin-check-action@v1
