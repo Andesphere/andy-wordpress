@@ -1,12 +1,13 @@
 # Publishes a tagged version to the WordPress.org plugin directory (SVN).
 #
 # Trigger: a pushed tag vMAJOR.MINOR.PATCH whose number equals the plugin's Version header, the
-# ANDY_CHAT_VERSION constant, the readme Stable tag and a readme changelog entry (bin/check-release-version.sh).
+# ANDY_CHAT_VERSION constant, the readme Stable tag and a readme changelog entry
+# (bin/check-release-version.sh).
 #
 # This workflow cannot publish until the directory has approved the andy-chat slug and Jorge has stored
 # the SVN credentials: bin/release-guard.sh fails the run unless the repository variable
-# WPORG_DEPLOY_APPROVED is "true" and the secrets SVN_USERNAME and SVN_PASSWORD exist. Before that, pushing
-# a version tag only builds, validates and uploads the ZIP; nothing reaches WordPress.org.
+# WPORG_DEPLOY_APPROVED is "true" and the secrets SVN_USERNAME and SVN_PASSWORD exist. Before that,
+# pushing a version tag only builds and validates the ZIP; nothing reaches WordPress.org.
 # The initial submission is manual (docs/release.md). No manual trigger exists on purpose.
 name: Deploy to WordPress.org
 
@@ -24,67 +25,15 @@ concurrency:
 
 jobs:
   package:
-    name: Build and validate the tagged package
-    runs-on: ubuntu-latest
-    outputs:
-      version: ${{ steps.version.outputs.version }}
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Tag, plugin header, constant, stable tag and changelog agree
-        id: version
-        run: |
-          set -euo pipefail
-          version="$(bin/check-release-version.sh "$GITHUB_REF_NAME")"
-          echo "version=$version" >> "$GITHUB_OUTPUT"
-          echo "releasing andy-chat $version from tag $GITHUB_REF_NAME"
-
-      - name: Set up PHP 8.1 (the plugin's minimum)
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.1'
-          coverage: none
-
-      - name: PHP syntax check
-        run: |
-          set -euo pipefail
-          find . -name '*.php' -not -path './dist/*' -print0 | xargs -0 -n1 php -l
-
-      - name: Build release ZIP
-        run: bin/build-zip.sh
-
-      - name: Unpack the ZIP exactly as WordPress would
-        run: |
-          set -euo pipefail
-          mkdir -p package
-          unzip -q dist/andy-chat.zip -d package
-          test -f package/andy-chat/andy-chat.php
-          test -f package/andy-chat/readme.txt
-          test ! -e package/andy-chat/.github
-          test ! -e package/andy-chat/bin
-          test ! -e package/andy-chat/docs
-          bin/check-release-version.sh "$GITHUB_REF_NAME" >/dev/null
-          sha256sum dist/andy-chat.zip
-
-      - name: Plugin Check on the packaged plugin
-        uses: WordPress/plugin-check-action@v1
-        with:
-          build-dir: ./package/andy-chat
-          wp-version: '7.1'
-
-      - name: Upload the validated ZIP
-        uses: actions/upload-artifact@v4
-        with:
-          name: andy-chat-${{ steps.version.outputs.version }}
-          path: dist/andy-chat.zip
-          if-no-files-found: error
+    # Same lint, catalog, ZIP and Plugin Check steps as every push; uploads the ZIP as "andy-chat".
+    uses: ./.github/workflows/ci.yml
 
   deploy:
     name: Commit the validated package to WordPress.org SVN
     needs: package
     runs-on: ubuntu-latest
-    # The environment is where Jorge stores SVN_USERNAME and SVN_PASSWORD; it may also carry a required
-    # reviewer so every publication gets a human click. GitHub creates it on first use.
+    # The environment holds SVN_USERNAME and SVN_PASSWORD and may carry a required reviewer so every
+    # publication waits for a human click. GitHub creates it on first use.
     environment: wordpress-org
     steps:
       - uses: actions/checkout@v4
@@ -96,22 +45,24 @@ jobs:
           SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
         run: bin/release-guard.sh
 
+      - name: Tag equals plugin version, stable tag and changelog
+        run: bin/check-release-version.sh "$GITHUB_REF_NAME"
+
       - name: Download the ZIP that Plugin Check validated
         uses: actions/download-artifact@v4
         with:
-          name: andy-chat-${{ needs.package.outputs.version }}
+          name: andy-chat
           path: dist
 
       - name: Unpack it as the deploy source
         run: |
           set -euo pipefail
-          mkdir -p package
+          sha256sum dist/andy-chat.zip
           unzip -q dist/andy-chat.zip -d package
           test -f package/andy-chat/andy-chat.php
-          bin/check-release-version.sh "$GITHUB_REF_NAME" >/dev/null
 
-      # BUILD_DIR makes the action deploy exactly the unpacked ZIP contents; .distignore is not consulted
-      # again. The tag name minus its "v" becomes the SVN tag, so tags/0.1.0 matches "Stable tag: 0.1.0".
+      # BUILD_DIR makes the action deploy exactly the unpacked ZIP; .distignore is not consulted again.
+      # The tag minus its "v" becomes the SVN tag, so tags/0.1.0 matches "Stable tag: 0.1.0".
       # No .wordpress-org directory exists, so no listing assets are pushed.
       - name: Deploy to WordPress.org SVN
         uses: 10up/action-wordpress-plugin-deploy@54bd289b8525fd23a5c365ec369185f2966529c2 # 2.3.0

@@ -110,12 +110,13 @@ GitHub masks registered secrets in logs, so never enable `ACTIONS_STEP_DEBUG` on
    ```
 
 4. `.github/workflows/deploy.yml` runs two jobs:
-   - `package` checks that the tag equals the plugin version, lints, builds the ZIP, unpacks it, runs
-     Plugin Check on it and uploads it as `andy-chat-<version>`.
-   - `deploy` runs the release guard, downloads that exact artifact, unpacks it and hands the folder to
-     `10up/action-wordpress-plugin-deploy` (pinned to the 2.3.0 commit) with `BUILD_DIR`, so what
-     reaches SVN is byte-for-byte what Plugin Check validated. The action commits to `trunk` and
-     copies it to `tags/<version>` in one SVN commit. `.distignore` is not consulted again.
+   - `package` calls `ci.yml` as a reusable workflow: the same lint, catalog, ZIP and Plugin Check
+     steps as every push, uploading the ZIP as the `andy-chat` artifact.
+   - `deploy` runs the release guard, checks that the tag equals the plugin version, downloads that
+     exact artifact, unpacks it and hands the folder to `10up/action-wordpress-plugin-deploy` (pinned
+     to the 2.3.0 commit) with `BUILD_DIR`, so what reaches SVN is byte-for-byte what Plugin Check
+     validated. The action commits to `trunk` and copies it to `tags/<version>` in one SVN commit.
+     `.distignore` is not consulted again.
 5. There is no manual trigger and no way to skip the guard. A rehearsal without an SVN commit is
    possible by opening a PR that adds `with: dry-run: true` to the deploy step, tagging, then reverting.
 
