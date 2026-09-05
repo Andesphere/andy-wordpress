@@ -115,6 +115,54 @@ msgstr "Si tu Agente restringe los Orígenes Permitidos (Allowed Origins) en And
 msgid "Letters, digits, hyphens and underscores only. Example: k2f9x0w4d7mqzn1vp8yc3rh6t5ejab0g"
 msgstr "Solo letras, dígitos, guiones y guiones bajos. Ejemplo: k2f9x0w4d7mqzn1vp8yc3rh6t5ejab0g"
 
+msgid "Access check"
+msgstr "Comprobar acceso"
+
+msgid "Check access from this site"
+msgstr "Comprobar el acceso desde este sitio"
+
+msgid "Asks Andy for the public configuration of the embed id above, from this browser, so the answer reflects this site's origin. Nothing is saved and no message is sent."
+msgstr "Pide a Andy la configuración pública del embed id de arriba, desde este navegador, para que la respuesta refleje el origen de este sitio. No se guarda nada ni se envía ningún mensaje."
+
+msgid "Enter a valid embed id before checking: letters, digits, hyphens and underscores only."
+msgstr "Introduce un embed id válido antes de comprobar: solo letras, dígitos, guiones y guiones bajos."
+
+#. translators: 1: embed id, 2: this site's origin, for example https://example.com
+#, php-format
+msgid "Checking %1$s from %2$s…"
+msgstr "Comprobando %1$s desde %2$s…"
+
+#. translators: 1: Agent name, 2: this site's origin, for example https://example.com
+#, php-format
+msgid "Success: Andy answered from %2$s with the configuration of the Agent \"%1$s\", so this site is allowed to load it. Chats still need an active Andy plan."
+msgstr "Correcto: Andy respondió desde %2$s con la configuración del Agente \"%1$s\", así que este sitio tiene permiso para cargarlo. Los chats siguen necesitando un plan activo de Andy."
+
+#. translators: %s: embed id
+#, php-format
+msgid "Andy answered that no Agent with embed id %s exists. Copy the id again from the Installation tab of your Agent."
+msgstr "Andy respondió que no existe ningún Agente con el embed id %s. Vuelve a copiar el id desde la pestaña Instalación de tu Agente."
+
+#. translators: %s: HTTP status code
+#, php-format
+msgid "Andy answered with HTTP %s. Try again in a few minutes. This is not an Allowed Origins problem."
+msgstr "Andy respondió con HTTP %s. Inténtalo de nuevo en unos minutos. No es un problema de Orígenes Permitidos."
+
+msgid "Andy answered but did not let this browser read the reply. That happens when the embed id does not exist, or when the Agent restricts Allowed Origins and this site is not on the list."
+msgstr "Andy respondió, pero no dejó que este navegador leyera la respuesta. Eso ocurre cuando el embed id no existe o cuando el Agente restringe los Orígenes Permitidos y este sitio no está en la lista."
+
+#. translators: %s: this site's origin, for example https://example.com
+#, php-format
+msgid "If the embed id matches the Andy App exactly, open your Agent in Andy, go to Settings → Security → Allowed Origins, add %s and check again."
+msgstr "Si el embed id coincide exactamente con el de la App de Andy, abre tu Agente en Andy, ve a Ajustes → Seguridad → Orígenes Permitidos, añade %s y vuelve a comprobar."
+
+#. translators: %s: the public site's origin, for example https://example.com
+#, php-format
+msgid "Visitors use %s, so add that origin as well."
+msgstr "Los visitantes usan %s, así que añade también ese origen."
+
+msgid "Could not reach app.andypartner.com from this browser. Check your internet connection or a content blocker. This says nothing about Allowed Origins."
+msgstr "No se pudo conectar con app.andypartner.com desde este navegador. Revisa tu conexión a internet o un bloqueador de contenido. Esto no dice nada sobre los Orígenes Permitidos."
+
 msgid "Show the Andy widget on every public page"
 msgstr "Mostrar el widget de Andy en todas las páginas públicas"
 

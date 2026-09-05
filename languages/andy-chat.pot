@@ -18,7 +18,7 @@ msgstr ""
 #: andy-chat.php
 #: includes/admin-page.php:34
 #: includes/admin-page.php:35
-#: includes/admin-page.php:215
+#: includes/admin-page.php:289
 msgid "Andy Chat"
 msgstr ""
 
@@ -55,102 +55,162 @@ msgid "Embed id"
 msgstr ""
 
 #: includes/admin-page.php:72
+msgid "Access check"
+msgstr ""
+
+#: includes/admin-page.php:80
 msgid "Widget"
 msgstr ""
 
-#: includes/admin-page.php:89
+#: includes/admin-page.php:97
 msgid "Settings"
 msgstr ""
 
 #. translators: %s: hostname of the Andy service
-#: includes/admin-page.php:105
+#: includes/admin-page.php:113
 #, php-format
 msgid "When the widget is on, every public page of this site loads a script from %s, a service run by Andesphere. Nothing is sent while the widget is off."
 msgstr ""
 
-#: includes/admin-page.php:111
+#: includes/admin-page.php:119
 msgid "On page load the visitor's browser requests the widget script and your Agent's public configuration. Andy receives the visitor's IP address, browser details and this site's address as part of that request."
 msgstr ""
 
-#: includes/admin-page.php:112
+#: includes/admin-page.php:120
 msgid "When a visitor writes in the chat, the message text and a random conversation id are sent to Andy so your Agent can answer. The current widget release creates a new conversation id on every page load and keeps nothing in the visitor's browser between pages or visits. It sets no cookies."
 msgstr ""
 
-#: includes/admin-page.php:113
+#: includes/admin-page.php:121
 msgid "Andy keeps conversations while the Agent and Workspace exist, or until you delete them in Andy. Andy may keep technical logs for security and debugging. This plugin stores nothing about visitors and sends no analytics of its own."
 msgstr ""
 
-#: includes/admin-page.php:114
+#: includes/admin-page.php:122
 msgid "Turning the widget off, or deactivating this plugin, stops the script on the next page load. It does not delete conversations already stored in Andy; manage those from the Andy App."
 msgstr ""
 
 #. translators: 1: privacy policy link, 2: terms link, 3: data retention policy link
-#: includes/admin-page.php:120
+#: includes/admin-page.php:128
 #, php-format
 msgid "Read the %1$s, the %2$s and the %3$s before enabling the widget."
 msgstr ""
 
-#: includes/admin-page.php:121
+#: includes/admin-page.php:129
 msgid "Andy privacy policy"
 msgstr ""
 
-#: includes/admin-page.php:122
+#: includes/admin-page.php:130
 msgid "terms of service"
 msgstr ""
 
-#: includes/admin-page.php:123
+#: includes/admin-page.php:131
 msgid "data retention and deletion policy"
 msgstr ""
 
-#: includes/admin-page.php:136
+#: includes/admin-page.php:144
 msgid "In the Andy App open your Agent, go to Installation and pick the HTML / Vanilla JavaScript tab. The value assigned to ANDY_CHATBOT_ID in that snippet is the public embed id. It is not a secret and no API key is needed."
 msgstr ""
 
 #. translators: %s: link to create an Andy account
-#: includes/admin-page.php:142
+#: includes/admin-page.php:150
 #, php-format
 msgid "No Andy account yet? %s"
 msgstr ""
 
-#: includes/admin-page.php:143
+#: includes/admin-page.php:151
 msgid "Create your Andy account"
 msgstr ""
 
 #. translators: %s: this site's origin, for example https://example.com
-#: includes/admin-page.php:151
+#: includes/admin-page.php:159
 #, php-format
 msgid "If your Agent restricts Allowed Origins in Andy, that list must include this site: %s"
 msgstr ""
 
-#: includes/admin-page.php:179
+#: includes/admin-page.php:187
 msgid "Letters, digits, hyphens and underscores only. Example: k2f9x0w4d7mqzn1vp8yc3rh6t5ejab0g"
 msgstr ""
 
-#: includes/admin-page.php:191
+#: includes/admin-page.php:199
+msgid "Check access from this site"
+msgstr ""
+
+#: includes/admin-page.php:200
+msgid "Asks Andy for the public configuration of the embed id above, from this browser, so the answer reflects this site's origin. Nothing is saved and no message is sent."
+msgstr ""
+
+#: includes/admin-page.php:231
+msgid "Enter a valid embed id before checking: letters, digits, hyphens and underscores only."
+msgstr ""
+
+#. translators: 1: embed id, 2: this site's origin, for example https://example.com
+#: includes/admin-page.php:233
+#, php-format
+msgid "Checking %1$s from %2$s…"
+msgstr ""
+
+#. translators: 1: Agent name, 2: this site's origin, for example https://example.com
+#: includes/admin-page.php:235
+#, php-format
+msgid "Success: Andy answered from %2$s with the configuration of the Agent \"%1$s\", so this site is allowed to load it. Chats still need an active Andy plan."
+msgstr ""
+
+#. translators: %s: embed id
+#: includes/admin-page.php:237
+#, php-format
+msgid "Andy answered that no Agent with embed id %s exists. Copy the id again from the Installation tab of your Agent."
+msgstr ""
+
+#. translators: %s: HTTP status code
+#: includes/admin-page.php:239
+#, php-format
+msgid "Andy answered with HTTP %s. Try again in a few minutes. This is not an Allowed Origins problem."
+msgstr ""
+
+#: includes/admin-page.php:240
+msgid "Andy answered but did not let this browser read the reply. That happens when the embed id does not exist, or when the Agent restricts Allowed Origins and this site is not on the list."
+msgstr ""
+
+#. translators: %s: this site's origin, for example https://example.com
+#: includes/admin-page.php:242
+#, php-format
+msgid "If the embed id matches the Andy App exactly, open your Agent in Andy, go to Settings → Security → Allowed Origins, add %s and check again."
+msgstr ""
+
+#. translators: %s: the public site's origin, for example https://example.com
+#: includes/admin-page.php:244
+#, php-format
+msgid "Visitors use %s, so add that origin as well."
+msgstr ""
+
+#: includes/admin-page.php:245
+msgid "Could not reach app.andypartner.com from this browser. Check your internet connection or a content blocker. This says nothing about Allowed Origins."
+msgstr ""
+
+#: includes/admin-page.php:265
 msgid "Show the Andy widget on every public page"
 msgstr ""
 
-#: includes/admin-page.php:193
+#: includes/admin-page.php:267
 msgid "Leave this off until you have read the disclosure above. Activating the plugin alone never loads the widget."
 msgstr ""
 
-#: includes/admin-page.php:202
+#: includes/admin-page.php:276
 msgid "You do not have permission to change Andy Chat settings."
 msgstr ""
 
-#: includes/admin-page.php:207
+#: includes/admin-page.php:281
 msgid "The Andy widget is on. Visitors see it on every public page."
 msgstr ""
 
-#: includes/admin-page.php:209
+#: includes/admin-page.php:283
 msgid "The Andy widget is off. Paste your embed id to get started."
 msgstr ""
 
-#: includes/admin-page.php:211
+#: includes/admin-page.php:285
 msgid "The Andy widget is off. Turn it on below when you are ready."
 msgstr ""
 
-#: includes/admin-page.php:221
+#: includes/admin-page.php:295
 msgid "Save settings"
 msgstr ""
 
