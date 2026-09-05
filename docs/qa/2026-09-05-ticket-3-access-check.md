@@ -1,7 +1,7 @@
 # Ticket #3 QA: check Agent access from the WordPress settings page
 
 Tested commits: the PR head (recorded in the PR description) re-ran the full checklist; the first
-pass ran against 6d0a5c7 plus the working tree that became the second commit. Environment: WordPress
+pass ran against 3ce52fd plus the working tree that became df83e10. Environment: WordPress
 Playground CLI 3.1.52 (WASM PHP 8.1, WordPress 7.1, SQLite), port 18843, synthetic site
 "Andy Chat QA (synthetic)", synthetic embed id `qa0synthetic0embed0id0000000000a`. No production
 site, no Andy account and no real Agent were touched. No chat message was sent. The only requests that
