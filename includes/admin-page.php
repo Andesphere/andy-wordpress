@@ -141,7 +141,7 @@ function andy_chat_render_disclosure_section(): void {
 function andy_chat_render_connection_section(): void {
 	?>
 	<p>
-		<?php esc_html_e( 'In the Andy App open your Agent, go to Installation and pick the HTML / Vanilla JavaScript tab. The value assigned to ANDY_CHATBOT_ID in that snippet is the public embed id. It is not a secret and no API key is needed.', 'andy-chat' ); ?>
+		<?php esc_html_e( 'In the Andy App open your Agent, go to Channels and click Configure on the Website Widget card. The value of embedId in the code snippet that opens is the public embed id. It is not a secret and no API key is needed.', 'andy-chat' ); ?>
 	</p>
 	<p>
 		<?php
@@ -236,7 +236,7 @@ function andy_chat_enqueue_settings_assets( string $hook_suffix ): void {
 			/* translators: %s: the public site's origin, for example https://example.com */
 			'successOtherOrigin' => __( 'Visitors load the widget from %s, which this check did not test. If the Agent restricts Allowed Origins, that origin must be on the list too.', 'andy-chat' ),
 			/* translators: %s: embed id */
-			'notFound'          => __( 'Andy answered that no Agent with embed id %s exists. Copy the id again from the Installation tab of your Agent.', 'andy-chat' ),
+			'notFound'          => __( 'Andy answered that no Agent with embed id %s exists. Copy the id again from the Website Widget snippet of your Agent (Channels → Website Widget → Configure).', 'andy-chat' ),
 			/* translators: %s: HTTP status code */
 			'unexpected'        => __( 'Andy answered with HTTP %s instead of the Agent\'s configuration. Try again in a few minutes. This is not an Allowed Origins problem.', 'andy-chat' ),
 			'blocked'           => __( 'Andy answered but did not let this browser read the reply. That happens when the embed id does not exist, or when the Agent restricts Allowed Origins and this site is not on the list.', 'andy-chat' ),
