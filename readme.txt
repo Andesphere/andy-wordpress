@@ -25,7 +25,7 @@ Interface and validation messages are available in English and Spanish.
 This plugin loads a script from Andy, a service operated by Andesphere. It only does so after an administrator has turned the widget on. What is sent, and when:
 
 * On every public page load while the widget is on, the visitor's browser requests `https://app.andypartner.com/widget.js` and the public configuration of your Agent from `https://app.andypartner.com/api`. Andy receives the visitor's IP address, browser details and the address of your site as part of those requests.
-* When a visitor writes in the chat, the message text and a temporary session id are sent to Andy so your Agent can answer. If your Agent is configured to ask for a name and email, those are sent too.
+* When a visitor writes in the chat, the message text and a random conversation id are sent to Andy so your Agent can answer. The current widget release creates a new conversation id on every page load and keeps nothing in the visitor's browser between pages or visits. It sets no cookies.
 * Andy keeps conversations while the Agent and Workspace exist, or until you delete them in Andy. Technical logs may be kept for security and debugging.
 * Turning the widget off, or deactivating or deleting the plugin, stops the script on the next page load. It does not delete conversations already stored in Andy; manage those from the Andy App.
 

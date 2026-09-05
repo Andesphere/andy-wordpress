@@ -81,50 +81,52 @@ function andy_chat_register_settings(): void {
 add_action( 'admin_init', 'andy_chat_register_settings' );
 
 /**
- * Validates submitted settings. Invalid input keeps the previously saved value and reports a settings error.
+ * Validates submitted settings.
+ *
+ * Three outcomes, and nothing in between:
+ * - valid id: stored, toggle stored as submitted;
+ * - empty id: stored as empty, toggle forced off (an error explains why when it was on);
+ * - invalid non-empty id: the whole previously saved state comes back untouched, with an error.
+ *   A typo never changes the stored id and never flips the widget on or off.
  *
  * @param mixed $input Raw submitted value.
  * @return array{embed_id: string, enabled: bool}
  */
 function andy_chat_sanitize_settings( $input ): array {
+	$current = andy_chat_get_settings();
+
 	if ( ! current_user_can( 'manage_options' ) ) {
-		return andy_chat_get_settings();
+		return $current;
 	}
 
-	$current = andy_chat_get_settings();
-	$input   = is_array( $input ) ? $input : array();
-
+	$input    = is_array( $input ) ? $input : array();
 	$raw_id   = isset( $input['embed_id'] ) && is_string( $input['embed_id'] ) ? $input['embed_id'] : '';
 	$embed_id = trim( sanitize_text_field( $raw_id ) );
 	$enabled  = ! empty( $input['enabled'] );
 
-	$output = $current;
-
-	if ( '' === $embed_id ) {
-		$output['embed_id'] = '';
-		if ( $enabled ) {
-			add_settings_error(
-				'andy_chat',
-				'andy_chat_embed_id_missing',
-				__( 'Enter your Agent\'s embed id before enabling the widget. The widget stays off.', 'andy-chat' )
-			);
-			$enabled = false;
-		}
-	} elseif ( ! andy_chat_is_valid_embed_id( $embed_id ) ) {
+	if ( '' !== $embed_id && ! andy_chat_is_valid_embed_id( $embed_id ) ) {
 		add_settings_error(
 			'andy_chat',
 			'andy_chat_embed_id_invalid',
-			__( 'That embed id is not valid. Copy it from the Installation tab of your Agent in the Andy App: it only contains letters, digits, hyphens and underscores.', 'andy-chat' )
+			__( 'That embed id is not valid, so nothing was changed. Copy it from the Installation tab of your Agent in the Andy App: it only contains letters, digits, hyphens and underscores.', 'andy-chat' )
 		);
-		// Keep the previously saved id so a typo never wipes a working setup.
-		if ( $enabled && '' === $current['embed_id'] ) {
-			$enabled = false;
-		}
-	} else {
-		$output['embed_id'] = $embed_id;
+
+		return $current;
 	}
 
-	$output['enabled'] = $enabled;
+	if ( '' === $embed_id && $enabled ) {
+		add_settings_error(
+			'andy_chat',
+			'andy_chat_embed_id_missing',
+			__( 'Enter your Agent\'s embed id before enabling the widget. The widget stays off.', 'andy-chat' )
+		);
+	}
+
+	$output = array(
+		'embed_id' => $embed_id,
+		// Same invariant as andy_chat_is_widget_active(): the widget cannot be on without a valid stored id.
+		'enabled'  => $enabled && andy_chat_is_valid_embed_id( $embed_id ),
+	);
 
 	if ( empty( get_settings_errors( 'andy_chat' ) ) ) {
 		add_settings_error(

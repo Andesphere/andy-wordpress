@@ -109,7 +109,7 @@ function andy_chat_render_disclosure_section(): void {
 	</p>
 	<ul class="ul-disc">
 		<li><?php esc_html_e( 'On page load the visitor\'s browser requests the widget script and your Agent\'s public configuration. Andy receives the visitor\'s IP address, browser details and this site\'s address as part of that request.', 'andy-chat' ); ?></li>
-		<li><?php esc_html_e( 'When a visitor writes in the chat, the message text and a temporary session id are sent to Andy so your Agent can answer. If your Agent asks for a name and email, those are sent too.', 'andy-chat' ); ?></li>
+		<li><?php esc_html_e( 'When a visitor writes in the chat, the message text and a random conversation id are sent to Andy so your Agent can answer. The current widget release creates a new conversation id on every page load and keeps nothing in the visitor\'s browser between pages or visits. It sets no cookies.', 'andy-chat' ); ?></li>
 		<li><?php esc_html_e( 'Andy keeps conversations while the Agent and Workspace exist, or until you delete them in Andy. Andy may keep technical logs for security and debugging. This plugin stores nothing about visitors and sends no analytics of its own.', 'andy-chat' ); ?></li>
 		<li><?php esc_html_e( 'Turning the widget off, or deactivating this plugin, stops the script on the next page load. It does not delete conversations already stored in Andy; manage those from the Andy App.', 'andy-chat' ); ?></li>
 	</ul>

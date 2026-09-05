@@ -26,12 +26,49 @@ jobs:
           set -euo pipefail
           find . -name '*.php' -not -path './dist/*' -print0 | xargs -0 -n1 php -l
 
-      - name: Translations are in sync with the source
+      - name: Install WP-CLI and gettext
         run: |
           set -euo pipefail
-          python3 bin/extract-strings.py
-          python3 bin/translations-es.py
+          sudo apt-get update -q && sudo apt-get install -y -q gettext
+          curl -sSLo /usr/local/bin/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+          chmod +x /usr/local/bin/wp
+          wp --version
+
+      # languages/andy-chat-es_ES.po is the hand-maintained source. Everything else in languages/ is
+      # regenerated here with WP-CLI and must match what is committed. POT-Creation-Date and X-Generator
+      # are pinned so the POT is byte-for-byte reproducible.
+      - name: Regenerate translation catalogs with WP-CLI
+        run: |
+          set -euo pipefail
+          wp i18n make-pot . languages/andy-chat.pot \
+            --slug=andy-chat --domain=andy-chat --skip-js --skip-block-json --skip-theme-json \
+            --exclude=bin,docs,dist,package,.github \
+            --headers='{"Report-Msgid-Bugs-To":"https://github.com/Andesphere/andy-wordpress/issues","POT-Creation-Date":"","X-Generator":"WP-CLI"}'
+          wp i18n make-mo languages/andy-chat-es_ES.po languages/
+          wp i18n make-php languages/
+
+      - name: Spanish catalog is complete and well formed
+        run: |
+          set -euo pipefail
+          # Syntax, and printf placeholder mismatches on php-format entries.
+          msgfmt --check --check-format --statistics -o /dev/null languages/andy-chat-es_ES.po
+          # Every string the source extracts must be present and translated; new or missing strings fail here.
+          msgcmp languages/andy-chat-es_ES.po languages/andy-chat.pot
+
+      - name: Committed catalogs match the regenerated ones
+        run: |
+          set -euo pipefail
+          git status --porcelain -- languages
           git diff --exit-code -- languages
+          test -z "$(git status --porcelain -- languages)"
+
+      - name: Upload regenerated catalogs (commit these when the previous step fails)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: languages-generated
+          path: languages/
+          if-no-files-found: error
 
       - name: Build release ZIP
         run: bin/build-zip.sh

@@ -1,6 +1,13 @@
+# Spanish (Spain) translation for Andy Chat. Hand-maintained: edit this file, never the .mo or .l10n.php.
+# Other Spanish locales fall back to this catalog until translate.wordpress.org ships their own.
+# This file is distributed under the same license as the Andy Chat plugin.
 msgid ""
 msgstr ""
 "Project-Id-Version: Andy Chat 0.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/Andesphere/andy-wordpress/issues\n"
+"PO-Revision-Date: 2026-09-05 12:00+0000\n"
+"Last-Translator: Andesphere <hola@andesphere.com>\n"
+"Language-Team: Spanish\n"
 "Language: es_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -8,8 +15,37 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Domain: andy-chat\n"
 
+#. Plugin Name of the plugin
 msgid "Andy Chat"
 msgstr "Andy Chat"
+
+#. Plugin URI of the plugin
+msgid "https://github.com/Andesphere/andy-wordpress"
+msgstr "https://github.com/Andesphere/andy-wordpress"
+
+#. Description of the plugin
+msgid "Adds your Andy AI Agent's chat widget to every public page of your site."
+msgstr "Añade el widget de chat de tu Agente de IA de Andy a todas las páginas públicas de tu sitio."
+
+#. Author of the plugin
+msgid "Andesphere"
+msgstr "Andesphere"
+
+#. Author URI of the plugin
+msgid "https://andypartner.com/"
+msgstr "https://andypartner.com/"
+
+msgid "That embed id is not valid, so nothing was changed. Copy it from the Installation tab of your Agent in the Andy App: it only contains letters, digits, hyphens and underscores."
+msgstr "Ese embed id no es válido, así que no se cambió nada. Cópialo desde la pestaña Instalación de tu Agente en la App de Andy: solo contiene letras, dígitos, guiones y guiones bajos."
+
+msgid "Enter your Agent's embed id before enabling the widget. The widget stays off."
+msgstr "Introduce el embed id de tu Agente antes de activar el widget. El widget sigue desactivado."
+
+msgid "Settings saved. The Andy widget is on for every public page."
+msgstr "Ajustes guardados. El widget de Andy está activado en todas las páginas públicas."
+
+msgid "Settings saved. The Andy widget is off."
+msgstr "Ajustes guardados. El widget de Andy está desactivado."
 
 msgid "Before you enable the widget"
 msgstr "Antes de activar el widget"
@@ -26,14 +62,16 @@ msgstr "Widget"
 msgid "Settings"
 msgstr "Ajustes"
 
+#. translators: %s: hostname of the Andy service
+#, php-format
 msgid "When the widget is on, every public page of this site loads a script from %s, a service run by Andesphere. Nothing is sent while the widget is off."
 msgstr "Con el widget activado, cada página pública de este sitio carga un script desde %s, un servicio operado por Andesphere. Con el widget desactivado no se envía nada."
 
 msgid "On page load the visitor's browser requests the widget script and your Agent's public configuration. Andy receives the visitor's IP address, browser details and this site's address as part of that request."
 msgstr "Al cargar la página, el navegador del visitante solicita el script del widget y la configuración pública de tu Agente. Andy recibe la dirección IP del visitante, datos del navegador y la dirección de este sitio como parte de esa solicitud."
 
-msgid "When a visitor writes in the chat, the message text and a temporary session id are sent to Andy so your Agent can answer. If your Agent asks for a name and email, those are sent too."
-msgstr "Cuando un visitante escribe en el chat, el texto del mensaje y un id de sesión temporal se envían a Andy para que tu Agente pueda responder. Si tu Agente pide nombre y email, también se envían."
+msgid "When a visitor writes in the chat, the message text and a random conversation id are sent to Andy so your Agent can answer. The current widget release creates a new conversation id on every page load and keeps nothing in the visitor's browser between pages or visits. It sets no cookies."
+msgstr "Cuando un visitante escribe en el chat, el texto del mensaje y un id de conversación aleatorio se envían a Andy para que tu Agente pueda responder. La versión actual del widget crea un id de conversación nuevo en cada carga de página y no guarda nada en el navegador del visitante entre páginas o visitas. No instala cookies."
 
 msgid "Andy keeps conversations while the Agent and Workspace exist, or until you delete them in Andy. Andy may keep technical logs for security and debugging. This plugin stores nothing about visitors and sends no analytics of its own."
 msgstr "Andy conserva las conversaciones mientras existan el Agente y el Workspace, o hasta que las elimines en Andy. Andy puede conservar registros técnicos por seguridad y depuración. Este plugin no guarda nada sobre los visitantes y no envía analíticas propias."
@@ -41,9 +79,12 @@ msgstr "Andy conserva las conversaciones mientras existan el Agente y el Workspa
 msgid "Turning the widget off, or deactivating this plugin, stops the script on the next page load. It does not delete conversations already stored in Andy; manage those from the Andy App."
 msgstr "Desactivar el widget, o desactivar este plugin, detiene el script en la siguiente carga de página. No elimina las conversaciones ya guardadas en Andy; gestiónalas desde la App de Andy."
 
+#. translators: 1: privacy policy link, 2: terms link, 3: data retention policy link
+#, php-format
 msgid "Read the %1$s, the %2$s and the %3$s before enabling the widget."
 msgstr "Lee la %1$s, los %2$s y la %3$s antes de activar el widget."
 
+#. translators: 1: privacy policy link, 2: terms link, 3: data retention policy link
 msgid "Andy privacy policy"
 msgstr "política de privacidad de Andy"
 
@@ -56,12 +97,17 @@ msgstr "política de retención y eliminación de datos"
 msgid "In the Andy App open your Agent, go to Installation and pick the HTML / Vanilla JavaScript tab. The value assigned to ANDY_CHATBOT_ID in that snippet is the public embed id. It is not a secret and no API key is needed."
 msgstr "En la App de Andy abre tu Agente, entra en Instalación y elige la pestaña HTML / Vanilla JavaScript. El valor asignado a ANDY_CHATBOT_ID en ese fragmento es el embed id público. No es un secreto y no hace falta ninguna API key."
 
+#. translators: %s: link to create an Andy account
+#, php-format
 msgid "No Andy account yet? %s"
 msgstr "¿Aún no tienes cuenta en Andy? %s"
 
+#. translators: %s: link to create an Andy account
 msgid "Create your Andy account"
 msgstr "Crea tu cuenta de Andy"
 
+#. translators: %s: this site's origin, for example https://example.com
+#, php-format
 msgid "If your Agent restricts Allowed Origins in Andy, that list must include this site: %s"
 msgstr "Si tu Agente restringe los Orígenes Permitidos (Allowed Origins) en Andy, esa lista debe incluir este sitio: %s"
 
@@ -88,15 +134,3 @@ msgstr "El widget de Andy está desactivado. Actívalo abajo cuando estés listo
 
 msgid "Save settings"
 msgstr "Guardar ajustes"
-
-msgid "Enter your Agent's embed id before enabling the widget. The widget stays off."
-msgstr "Introduce el embed id de tu Agente antes de activar el widget. El widget sigue desactivado."
-
-msgid "That embed id is not valid. Copy it from the Installation tab of your Agent in the Andy App: it only contains letters, digits, hyphens and underscores."
-msgstr "Ese embed id no es válido. Cópialo desde la pestaña Instalación de tu Agente en la App de Andy: solo contiene letras, dígitos, guiones y guiones bajos."
-
-msgid "Settings saved. The Andy widget is on for every public page."
-msgstr "Ajustes guardados. El widget de Andy está activado en todas las páginas públicas."
-
-msgid "Settings saved. The Andy widget is off."
-msgstr "Ajustes guardados. El widget de Andy está desactivado."

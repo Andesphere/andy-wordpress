@@ -31,17 +31,25 @@ require_once __DIR__ . '/includes/admin-page.php';
 require_once __DIR__ . '/includes/widget.php';
 
 /**
- * Loads bundled translations. Any Spanish locale (es_CL, es_MX, ...) reads the bundled es_ES catalog
- * until translate.wordpress.org supplies its own.
+ * Loads bundled translations.
+ *
+ * A language pack for the exact site locale always wins, whether WordPress hands us a .mo or a
+ * .l10n.php next to it. Only when no catalog exists for a Spanish locale (es_CL, es_MX, ...) does the
+ * bundled es_ES catalog stand in, so translate.wordpress.org packs take over as soon as they exist.
  */
 function andy_chat_load_textdomain(): void {
 	add_filter(
 		'load_textdomain_mofile',
 		static function ( string $mofile, string $domain ): string {
-			if ( 'andy-chat' === $domain && 1 === preg_match( '#/andy-chat-es_[A-Z]{2}\.mo$#', $mofile ) ) {
-				return preg_replace( '#es_[A-Z]{2}\.mo$#', 'es_ES.mo', $mofile );
+			if ( 'andy-chat' !== $domain || 1 !== preg_match( '#/andy-chat-es_[A-Z]{2}\.mo$#', $mofile ) ) {
+				return $mofile;
 			}
-			return $mofile;
+			if ( file_exists( $mofile ) || file_exists( substr_replace( $mofile, '.l10n.php', -3 ) ) ) {
+				return $mofile;
+			}
+			$bundled = plugin_dir_path( ANDY_CHAT_FILE ) . 'languages/andy-chat-es_ES.mo';
+
+			return file_exists( $bundled ) ? $bundled : $mofile;
 		},
 		10,
 		2
