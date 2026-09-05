@@ -108,7 +108,7 @@ function andy_chat_sanitize_settings( $input ): array {
 		add_settings_error(
 			'andy_chat',
 			'andy_chat_embed_id_invalid',
-			__( 'That embed id is not valid, so nothing was changed. Copy it from the Installation tab of your Agent in the Andy App: it only contains letters, digits, hyphens and underscores.', 'andy-chat' )
+			__( 'That embed id is not valid, so nothing was changed. Copy it from the Website Widget snippet of your Agent in the Andy App (Channels → Website Widget → Configure): it only contains letters, digits, hyphens and underscores.', 'andy-chat' )
 		);
 
 		return $current;

@@ -107,7 +107,7 @@ msgid "data retention and deletion policy"
 msgstr ""
 
 #: includes/admin-page.php:144
-msgid "In the Andy App open your Agent, go to Installation and pick the HTML / Vanilla JavaScript tab. The value assigned to ANDY_CHATBOT_ID in that snippet is the public embed id. It is not a secret and no API key is needed."
+msgid "In the Andy App open your Agent, go to Channels and click Configure on the Website Widget card. The value of embedId in the code snippet that opens is the public embed id. It is not a secret and no API key is needed."
 msgstr ""
 
 #. translators: %s: link to create an Andy account
@@ -163,7 +163,7 @@ msgstr ""
 #. translators: %s: embed id
 #: includes/admin-page.php:239
 #, php-format
-msgid "Andy answered that no Agent with embed id %s exists. Copy the id again from the Installation tab of your Agent."
+msgid "Andy answered that no Agent with embed id %s exists. Copy the id again from the Website Widget snippet of your Agent (Channels → Website Widget → Configure)."
 msgstr ""
 
 #. translators: %s: HTTP status code
@@ -231,7 +231,7 @@ msgid "Save settings"
 msgstr ""
 
 #: includes/settings.php:111
-msgid "That embed id is not valid, so nothing was changed. Copy it from the Installation tab of your Agent in the Andy App: it only contains letters, digits, hyphens and underscores."
+msgid "That embed id is not valid, so nothing was changed. Copy it from the Website Widget snippet of your Agent in the Andy App (Channels → Website Widget → Configure): it only contains letters, digits, hyphens and underscores."
 msgstr ""
 
 #: includes/settings.php:121
