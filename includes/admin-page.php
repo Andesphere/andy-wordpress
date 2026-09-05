@@ -236,7 +236,7 @@ function andy_chat_enqueue_settings_assets( string $hook_suffix ): void {
 			/* translators: %s: embed id */
 			'notFound'          => __( 'Andy answered that no Agent with embed id %s exists. Copy the id again from the Installation tab of your Agent.', 'andy-chat' ),
 			/* translators: %s: HTTP status code */
-			'unexpected'        => __( 'Andy answered with HTTP %s. Try again in a few minutes. This is not an Allowed Origins problem.', 'andy-chat' ),
+			'unexpected'        => __( 'Andy answered with HTTP %s instead of the Agent\'s configuration. Try again in a few minutes. This is not an Allowed Origins problem.', 'andy-chat' ),
 			'blocked'           => __( 'Andy answered but did not let this browser read the reply. That happens when the embed id does not exist, or when the Agent restricts Allowed Origins and this site is not on the list.', 'andy-chat' ),
 			/* translators: %s: this site's origin, for example https://example.com */
 			'addOrigin'         => __( 'If the embed id matches the Andy App exactly, open your Agent in Andy, go to Settings → Security → Allowed Origins, add %s and check again.', 'andy-chat' ),

@@ -144,8 +144,8 @@ msgstr "Andy respondió que no existe ningún Agente con el embed id %s. Vuelve 
 
 #. translators: %s: HTTP status code
 #, php-format
-msgid "Andy answered with HTTP %s. Try again in a few minutes. This is not an Allowed Origins problem."
-msgstr "Andy respondió con HTTP %s. Inténtalo de nuevo en unos minutos. No es un problema de Orígenes Permitidos."
+msgid "Andy answered with HTTP %s instead of the Agent's configuration. Try again in a few minutes. This is not an Allowed Origins problem."
+msgstr "Andy respondió con HTTP %s en lugar de la configuración del Agente. Inténtalo de nuevo en unos minutos. No es un problema de Orígenes Permitidos."
 
 msgid "Andy answered but did not let this browser read the reply. That happens when the embed id does not exist, or when the Agent restricts Allowed Origins and this site is not on the list."
 msgstr "Andy respondió, pero no dejó que este navegador leyera la respuesta. Eso ocurre cuando el embed id no existe o cuando el Agente restringe los Orígenes Permitidos y este sitio no está en la lista."

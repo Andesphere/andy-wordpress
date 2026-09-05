@@ -163,7 +163,7 @@ msgstr ""
 #. translators: %s: HTTP status code
 #: includes/admin-page.php:239
 #, php-format
-msgid "Andy answered with HTTP %s. Try again in a few minutes. This is not an Allowed Origins problem."
+msgid "Andy answered with HTTP %s instead of the Agent's configuration. Try again in a few minutes. This is not an Allowed Origins problem."
 msgstr ""
 
 #: includes/admin-page.php:240
