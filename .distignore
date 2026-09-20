@@ -17,3 +17,4 @@ composer.lock
 phpcs.xml
 phpcs.xml.dist
 *.zip
+languages
