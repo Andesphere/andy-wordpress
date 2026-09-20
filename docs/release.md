@@ -58,9 +58,11 @@ Checked against primary sources on 2026-09-05:
 ## What ships
 
 `bin/build-zip.sh` copies tracked files minus `.distignore` into `dist/andy-chat.zip`. The archive holds
-one `andy-chat/` folder with the plugin file, `includes/`, `assets/access-check.js`, `languages/`,
+one `andy-chat/` folder with the plugin file, `includes/`, `assets/access-check.js`,
 `readme.txt`, `uninstall.php` and `LICENSE`. Kept out: `.github`, `bin`, `docs`, dotfiles, editor and
-package-manager files, and anything untracked. The build is reproducible with Info-ZIP zip 3.0, the
+package-manager files, translation catalogs in `languages/`, and anything untracked. Translation
+source stays in Git for import into translate.wordpress.org after approval; WordPress supplies
+language packs, with no bundled fallback or custom text-domain loader. The build is reproducible with Info-ZIP zip 3.0, the
 `zip` on macOS and on `ubuntu-latest`: entries carry the HEAD commit time in UTC and fixed 755/644
 modes, so the same commit produces the same SHA-256 locally and in CI regardless of timezone or umask
 (verified at umask 022, 002 and 077). Compare the `sha256sum` line in the CI log with
