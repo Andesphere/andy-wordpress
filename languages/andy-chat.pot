@@ -2,7 +2,7 @@
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Andy Partner 0.1.1\n"
+"Project-Id-Version: Andy Partner – AI Chatbot & Live Chat Agent 0.1.2\n"
 "Report-Msgid-Bugs-To: https://github.com/Andesphere/andy-wordpress/issues\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,10 +16,7 @@ msgstr ""
 
 #. Plugin Name of the plugin
 #: andy-chat.php
-#: includes/admin-page.php:34
-#: includes/admin-page.php:35
-#: includes/admin-page.php:296
-msgid "Andy Partner"
+msgid "Andy Partner – AI Chatbot & Live Chat Agent"
 msgstr ""
 
 #. Plugin URI of the plugin
@@ -40,6 +37,12 @@ msgstr ""
 #. Author URI of the plugin
 #: andy-chat.php
 msgid "https://andypartner.com/"
+msgstr ""
+
+#: includes/admin-page.php:34
+#: includes/admin-page.php:35
+#: includes/admin-page.php:296
+msgid "Andy Partner"
 msgstr ""
 
 #: includes/admin-page.php:49

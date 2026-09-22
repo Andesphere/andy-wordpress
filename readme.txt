@@ -1,10 +1,10 @@
-=== Andy Partner ===
+=== Andy Partner – AI Chatbot & Live Chat Agent ===
 Contributors: andesphere
 Tags: ai chatbot, chatbot, live chat, customer support, lead generation
 Requires at least: 7.1
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 0.1.1
+Stable tag: 0.1.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -94,6 +94,9 @@ The widget stops loading immediately. Your saved settings stay in the database s
 2. Settings → Andy Partner: paste the embed id, check access and switch the widget on.
 
 == Changelog ==
+
+= 0.1.2 =
+* Directory name now says what the plugin is: Andy Partner – AI Chatbot & Live Chat Agent.
 
 = 0.1.1 =
 * Renamed to Andy Partner, the product's name.

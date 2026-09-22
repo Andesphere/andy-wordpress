@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the Andy Partner plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Andy Partner 0.1.1\n"
+"Project-Id-Version: Andy Partner 0.1.2\n"
 "Report-Msgid-Bugs-To: https://github.com/Andesphere/andy-wordpress/issues\n"
 "POT-Creation-Date: 2026-09-05T12:00:00+00:00\n"
 "PO-Revision-Date: 2026-09-05 12:00+0000\n"
@@ -17,6 +17,9 @@ msgstr ""
 "X-Domain: andy-chat\n"
 
 #. Plugin Name of the plugin
+msgid "Andy Partner – AI Chatbot & Live Chat Agent"
+msgstr "Andy Partner – Chatbot con IA y agente de chat en vivo"
+
 msgid "Andy Partner"
 msgstr "Andy Partner"
 
