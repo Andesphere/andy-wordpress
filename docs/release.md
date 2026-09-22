@@ -4,19 +4,18 @@ This is the release runbook for the `andy-chat` plugin. It covers what the repos
 own (build and validate a package, publish a tagged version once credentials exist) and what needs a
 person with the Andesphere WordPress.org account.
 
-## Where things stand (2026-09-05)
+## Where things stand (2026-09-22)
 
-| Item | State | Owner and tracker |
-| --- | --- | --- |
-| Release candidate ZIP, CI validation, this runbook | done in the repository | Matias, [#4](https://github.com/Andesphere/andy-wordpress/issues/4) |
-| WordPress.org account for Andesphere | pending | Jorge, [andyChat#1954](https://github.com/Andesphere/andyChat/issues/1954), human step [matias#596](https://github.com/JorgeMenaDev/matias/issues/596) |
-| Initial plugin submission and directory review | not started, needs the account | Jorge submits, Matias records evidence in #4 |
-| SVN credentials in GitHub Actions | not configured | Jorge, after approval |
-| `WPORG_DEPLOY_APPROVED` repository variable | not set | Jorge, after approval |
-| First publication (`v0.1.0` tag) | not done | Jorge orders it, see "Publishing a version" |
+| Item | State |
+| --- | --- |
+| WordPress.org account `andesphere` | exists, two-factor on; custody in the Matias Access Map |
+| Directory review | approved 2026-09-20 |
+| SVN credentials and `WPORG_DEPLOY_APPROVED` | configured in the `wordpress-org` environment |
+| Published | 0.1.0 on 2026-09-22, listed as Andy Chat; 0.1.1 renames the listing to Andy Partner |
 
-Nothing in this repository publishes anything today. Pushing a version tag before approval builds and
-validates the package and then fails the deploy job with a message naming what is missing.
+The slug `andy-chat` is permanent. The display name comes from the `Plugin Name` header and the readme
+title, and can change in any release. Listing icon, banners and screenshots live in `.wordpress-org/`
+and reach SVN `assets/` on every tagged deploy.
 
 ## Package facts
 

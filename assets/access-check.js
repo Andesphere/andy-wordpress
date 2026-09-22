@@ -1,5 +1,5 @@
 /**
- * Settings → Andy Chat: "Check access" button.
+ * Settings → Andy Partner: "Check access" button.
  *
  * Runs in the administrator's browser so the request carries this page's real origin, exactly as a
  * visitor's browser would from the public site. It only reads the Agent's public configuration; no
@@ -81,7 +81,7 @@
 
 		var current = run;
 		var controller = new window.AbortController();
-		var url = config.endpoint + encodeURIComponent( id );
+		var url = config.endpoint + encodeURIComponent( id ) + ( config.query || '' );
 		var options = { mode: 'cors', credentials: 'omit', cache: 'no-store', signal: controller.signal, headers: { Accept: 'application/json' } };
 
 		// Renders the one outcome of this click and ends the run. Anything arriving later is dropped.
