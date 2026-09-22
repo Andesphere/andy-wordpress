@@ -1,6 +1,6 @@
 <?php
 /**
- * Settings → Andy Chat screen.
+ * Settings → Andy Partner screen.
  *
  * @package AndyChat
  */
@@ -31,8 +31,8 @@ function andy_chat_signup_url(): string {
  */
 function andy_chat_add_settings_page(): void {
 	add_options_page(
-		__( 'Andy Chat', 'andy-chat' ),
-		__( 'Andy Chat', 'andy-chat' ),
+		__( 'Andy Partner', 'andy-chat' ),
+		__( 'Andy Partner', 'andy-chat' ),
 		'manage_options',
 		ANDY_CHAT_PAGE_SLUG,
 		'andy_chat_render_settings_page'
@@ -118,7 +118,7 @@ function andy_chat_render_disclosure_section(): void {
 	<ul class="ul-disc">
 		<li><?php esc_html_e( 'On page load the visitor\'s browser requests the widget script and your Agent\'s public configuration. Andy receives the visitor\'s IP address, browser details and this site\'s address as part of that request.', 'andy-chat' ); ?></li>
 		<li><?php esc_html_e( 'When a visitor writes in the chat, the message text and a random conversation id are sent to Andy so your Agent can answer. The current widget release creates a new conversation id on every page load and keeps nothing in the visitor\'s browser between pages or visits. It sets no cookies.', 'andy-chat' ); ?></li>
-		<li><?php esc_html_e( 'Andy keeps conversations while the Agent and Workspace exist, or until you delete them in Andy. Andy may keep technical logs for security and debugging. This plugin stores nothing about visitors and sends no analytics of its own.', 'andy-chat' ); ?></li>
+		<li><?php esc_html_e( 'Andy keeps conversations while the Agent and Workspace exist, or until you delete them in Andy. Andy may keep technical logs for security and debugging. This plugin stores nothing about visitors. Its only signal to Andy is that the access check below came from this plugin.', 'andy-chat' ); ?></li>
 		<li><?php esc_html_e( 'Turning the widget off, or deactivating this plugin, stops the script on the next page load. It does not delete conversations already stored in Andy; manage those from the Andy App.', 'andy-chat' ); ?></li>
 	</ul>
 	<p>
@@ -197,13 +197,13 @@ function andy_chat_render_embed_id_field(): void {
 function andy_chat_render_access_field(): void {
 	?>
 	<button type="button" id="andy-chat-check-access" class="button button-secondary"><?php esc_html_e( 'Check access from this site', 'andy-chat' ); ?></button>
-	<p class="description"><?php esc_html_e( 'Asks Andy for the public configuration of the embed id above, from this browser, so the answer reflects the origin of this page. Nothing is saved and no message is sent.', 'andy-chat' ); ?></p>
+	<p class="description"><?php esc_html_e( 'Asks Andy for the public configuration of the embed id above, from this browser, so the answer reflects the origin of this page. The request tells Andy it comes from this plugin, so Andy can count Agents connected through WordPress. Nothing is saved and no message is sent.', 'andy-chat' ); ?></p>
 	<div id="andy-chat-access-result" role="status" aria-live="polite"></div>
 	<?php
 }
 
 /**
- * Loads the access-check script on Settings → Andy Chat only, with its translated copy.
+ * Loads the access-check script on Settings → Andy Partner only, with its translated copy.
  *
  * Strings stay in PHP so the existing WP-CLI extraction covers them; the script substitutes %s itself
  * because the origin and the embed id are only known in the browser.
@@ -225,6 +225,8 @@ function andy_chat_enqueue_settings_assets( string $hook_suffix ): void {
 
 	$config = array(
 		'endpoint'   => ANDY_CHAT_API_URL . '/chatbot/',
+		// Tells Andy the check came from this plugin, so Andy can count Agents connected through WordPress.
+		'query'      => '?' . http_build_query( array( 'source' => 'wordpress-plugin', 'plugin_version' => ANDY_CHAT_VERSION ) ),
 		'siteOrigin' => andy_chat_site_origin(),
 		'pattern'    => trim( ANDY_CHAT_EMBED_ID_PATTERN, '/' ),
 		'text'       => array(
@@ -278,7 +280,7 @@ function andy_chat_render_enabled_field(): void {
  */
 function andy_chat_render_settings_page(): void {
 	if ( ! current_user_can( 'manage_options' ) ) {
-		wp_die( esc_html__( 'You do not have permission to change Andy Chat settings.', 'andy-chat' ), '', array( 'response' => 403 ) );
+		wp_die( esc_html__( 'You do not have permission to change Andy Partner settings.', 'andy-chat' ), '', array( 'response' => 403 ) );
 	}
 
 	$settings = andy_chat_get_settings();
@@ -291,7 +293,7 @@ function andy_chat_render_settings_page(): void {
 	}
 	?>
 	<div class="wrap">
-		<h1><?php esc_html_e( 'Andy Chat', 'andy-chat' ); ?></h1>
+		<h1><?php esc_html_e( 'Andy Partner', 'andy-chat' ); ?></h1>
 		<p id="andy-chat-status"><strong><?php echo esc_html( $status ); ?></strong></p>
 		<form action="options.php" method="post">
 			<?php

@@ -1,5 +1,5 @@
 # andy-wordpress
-Andy Chat for WordPress: the Andy AI chat widget on your site. Published on WordPress.org as andy-chat.
+Andy Partner for WordPress: your Andy Partner AI agent on your site. Published on WordPress.org as Andy Partner, slug andy-chat (the slug is permanent).
 
 ## Development
 
