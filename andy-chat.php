@@ -1,9 +1,9 @@
 <?php
 /**
- * Plugin Name:       Andy Partner
+ * Plugin Name:       Andy Partner – AI Chatbot & Live Chat Agent
  * Plugin URI:        https://github.com/Andesphere/andy-wordpress
  * Description:       Puts your Andy Partner AI agent on every public page of your site, so visitors get answers and you get the leads.
- * Version:           0.1.1
+ * Version:           0.1.2
  * Requires at least: 7.1
  * Requires PHP:      8.1
  * Author:            Andesphere
@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'ANDY_CHAT_VERSION', '0.1.1' );
+define( 'ANDY_CHAT_VERSION', '0.1.2' );
 define( 'ANDY_CHAT_FILE', __FILE__ );
 define( 'ANDY_CHAT_OPTION', 'andy_chat_settings' );
 define( 'ANDY_CHAT_WIDGET_URL', 'https://app.andypartner.com/widget.js' );
