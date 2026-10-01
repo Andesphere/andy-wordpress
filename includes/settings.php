@@ -108,7 +108,7 @@ function andy_chat_sanitize_settings( $input ): array {
 		add_settings_error(
 			'andy_chat',
 			'andy_chat_embed_id_invalid',
-			__( 'That embed id is not valid, so nothing was changed. Copy it from the Website Widget snippet of your Agent in the Andy App (Channels → Website Widget → Configure): it only contains letters, digits, hyphens and underscores.', 'andy-chat' )
+			__( 'That Agent ID is not valid, so nothing was changed. In Andy open Channels → Website Widget → Configure, choose WordPress and copy Agent ID. It only contains letters, digits, hyphens and underscores.', 'andy-chat' )
 		);
 
 		return $current;
@@ -118,7 +118,7 @@ function andy_chat_sanitize_settings( $input ): array {
 		add_settings_error(
 			'andy_chat',
 			'andy_chat_embed_id_missing',
-			__( 'Enter your Agent\'s embed id before enabling the widget. The widget stays off.', 'andy-chat' )
+			__( 'Enter your Agent ID before enabling the widget. The widget stays off.', 'andy-chat' )
 		);
 	}
 
@@ -133,7 +133,7 @@ function andy_chat_sanitize_settings( $input ): array {
 			'andy_chat',
 			'andy_chat_saved',
 			$output['enabled']
-				? __( 'Settings saved. The Andy widget is on for every public page.', 'andy-chat' )
+				? __( 'Settings saved. The widget is enabled in WordPress; open a public page to test it.', 'andy-chat' )
 				: __( 'Settings saved. The Andy widget is off.', 'andy-chat' ),
 			'success'
 		);

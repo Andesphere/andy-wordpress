@@ -1,12 +1,11 @@
 # Spanish (Spain) translation for Andy Partner. Hand-maintained: edit this file, never the .mo or .l10n.php.
-# Other Spanish locales fall back to this catalog until translate.wordpress.org ships their own.
 # This file is distributed under the same license as the Andy Partner plugin.
 msgid ""
 msgstr ""
 "Project-Id-Version: Andy Partner 0.1.2\n"
 "Report-Msgid-Bugs-To: https://github.com/Andesphere/andy-wordpress/issues\n"
 "POT-Creation-Date: 2026-09-05T12:00:00+00:00\n"
-"PO-Revision-Date: 2026-09-05 12:00+0000\n"
+"PO-Revision-Date: 2026-10-01 14:00+0000\n"
 "Last-Translator: Andesphere <hola@andesphere.com>\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
@@ -16,40 +15,41 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Domain: andy-chat\n"
 
-#. Plugin Name of the plugin
 msgid "Andy Partner – AI Chatbot & Live Chat Agent"
 msgstr "Andy Partner – Chatbot con IA y agente de chat en vivo"
 
-msgid "Andy Partner"
-msgstr "Andy Partner"
-
-#. Plugin URI of the plugin
 msgid "https://github.com/Andesphere/andy-wordpress"
 msgstr "https://github.com/Andesphere/andy-wordpress"
 
-#. Description of the plugin
 msgid "Puts your Andy Partner AI agent on every public page of your site, so visitors get answers and you get the leads."
 msgstr "Pone a tu agente de IA de Andy Partner en todas las páginas públicas de tu sitio: tus visitantes reciben respuestas y tú recibes los contactos."
 
-#. Author of the plugin
 msgid "Andesphere"
 msgstr "Andesphere"
 
-#. Author URI of the plugin
 msgid "https://andypartner.com/"
 msgstr "https://andypartner.com/"
 
-msgid "That embed id is not valid, so nothing was changed. Copy it from the Website Widget snippet of your Agent in the Andy App (Channels → Website Widget → Configure): it only contains letters, digits, hyphens and underscores."
-msgstr "Ese embed id no es válido, así que no se cambió nada. Cópialo desde el fragmento de código del Widget de Sitio Web de tu Agente en la App de Andy (Canales → Widget de Sitio Web → Configurar): solo contiene letras, dígitos, guiones y guiones bajos."
+msgid "That Agent ID is not valid, so nothing was changed. In Andy open Channels → Website Widget → Configure, choose WordPress and copy Agent ID. It only contains letters, digits, hyphens and underscores."
+msgstr "Ese Agent ID no es válido, así que no se cambió nada. En Andy abre Canales → Widget de Sitio Web → Configurar, elige WordPress y copia Agent ID. Solo contiene letras, dígitos, guiones y guiones bajos."
 
-msgid "Enter your Agent's embed id before enabling the widget. The widget stays off."
-msgstr "Introduce el embed id de tu Agente antes de activar el widget. El widget sigue desactivado."
+msgid "Enter your Agent ID before enabling the widget. The widget stays off."
+msgstr "Introduce tu Agent ID antes de activar el widget. El widget sigue desactivado."
 
-msgid "Settings saved. The Andy widget is on for every public page."
-msgstr "Ajustes guardados. El widget de Andy está activado en todas las páginas públicas."
+msgid "Settings saved. The widget is enabled in WordPress; open a public page to test it."
+msgstr "Ajustes guardados. El widget está activado en WordPress; abre una página pública para probarlo."
 
 msgid "Settings saved. The Andy widget is off."
 msgstr "Ajustes guardados. El widget de Andy está desactivado."
+
+msgid "Andy Partner is activated. Review your Agent ID and widget settings, then test a public page."
+msgstr "Andy Partner está activado. Revisa tu Agent ID y los ajustes del widget; después prueba una página pública."
+
+msgid "Open Andy Partner settings"
+msgstr "Abrir ajustes de Andy Partner"
+
+msgid "Andy Partner"
+msgstr "Andy Partner"
 
 msgid "Before you enable the widget"
 msgstr "Antes de activar el widget"
@@ -57,8 +57,11 @@ msgstr "Antes de activar el widget"
 msgid "Connect your Agent"
 msgstr "Conecta tu Agente"
 
-msgid "Embed id"
-msgstr "Embed id"
+msgid "Agent ID"
+msgstr "Agent ID"
+
+msgid "Access check"
+msgstr "Comprobar acceso"
 
 msgid "Widget"
 msgstr "Widget"
@@ -66,7 +69,6 @@ msgstr "Widget"
 msgid "Settings"
 msgstr "Ajustes"
 
-#. translators: %s: hostname of the Andy service
 #, php-format
 msgid "When the widget is on, every public page of this site loads a script from %s, a service run by Andesphere. Nothing is sent while the widget is off."
 msgstr "Con el widget activado, cada página pública de este sitio carga un script desde %s, un servicio operado por Andesphere. Con el widget desactivado no se envía nada."
@@ -77,18 +79,16 @@ msgstr "Al cargar la página, el navegador del visitante solicita el script del 
 msgid "When a visitor writes in the chat, the message text and a random conversation id are sent to Andy so your Agent can answer. The current widget release creates a new conversation id on every page load and keeps nothing in the visitor's browser between pages or visits. It sets no cookies."
 msgstr "Cuando un visitante escribe en el chat, el texto del mensaje y un id de conversación aleatorio se envían a Andy para que tu Agente pueda responder. La versión actual del widget crea un id de conversación nuevo en cada carga de página y no guarda nada en el navegador del visitante entre páginas o visitas. No instala cookies."
 
-msgid "Andy keeps conversations while the Agent and Workspace exist, or until you delete them in Andy. Andy may keep technical logs for security and debugging. This plugin stores nothing about visitors. Its only signal to Andy is that the access check below came from this plugin."
-msgstr "Andy conserva las conversaciones mientras existan el Agente y el Workspace, o hasta que las elimines en Andy. Andy puede conservar registros técnicos por seguridad y depuración. Este plugin no guarda nada sobre los visitantes. Lo único que le indica a Andy es que la comprobación de acceso de abajo vino de este plugin."
+msgid "Andy keeps conversations while the Agent and Workspace exist, or until you delete them in Andy. Andy may keep technical logs for security and debugging. This plugin stores nothing about visitors. Account links share the public site URL and settings return when you open them; the access check identifies this plugin for attribution."
+msgstr "Andy conserva las conversaciones mientras existan el Agente y el Workspace, o hasta que las elimines en Andy. Andy puede conservar registros técnicos por seguridad y depuración. Este plugin no guarda nada sobre los visitantes. Al abrir los enlaces de cuenta se comparten la URL pública del sitio y el regreso a los ajustes; la comprobación identifica este plugin para atribución."
 
 msgid "Turning the widget off, or deactivating this plugin, stops the script on the next page load. It does not delete conversations already stored in Andy; manage those from the Andy App."
 msgstr "Desactivar el widget, o desactivar este plugin, detiene el script en la siguiente carga de página. No elimina las conversaciones ya guardadas en Andy; gestiónalas desde la App de Andy."
 
-#. translators: 1: privacy policy link, 2: terms link, 3: data retention policy link
 #, php-format
 msgid "Read the %1$s, the %2$s and the %3$s before enabling the widget."
 msgstr "Lee la %1$s, los %2$s y la %3$s antes de activar el widget."
 
-#. translators: 1: privacy policy link, 2: terms link, 3: data retention policy link
 msgid "Andy privacy policy"
 msgstr "política de privacidad de Andy"
 
@@ -98,19 +98,19 @@ msgstr "términos del servicio"
 msgid "data retention and deletion policy"
 msgstr "política de retención y eliminación de datos"
 
-msgid "In the Andy App open your Agent, go to Channels and click Configure on the Website Widget card. The value of embedId in the code snippet that opens is the public embed id. It is not a secret and no API key is needed."
-msgstr "En la App de Andy abre tu Agente, entra en Canales y pulsa Configurar en la tarjeta Widget de Sitio Web. El valor de embedId en el fragmento de código que se abre es el embed id público. No es un secreto y no hace falta ninguna API key."
+msgid "In Andy open your Agent → Channels → Website Widget → Configure, choose WordPress and copy Agent ID. Paste that ID below. It is public; no API key is needed."
+msgstr "En Andy abre tu Agente → Canales → Widget de Sitio Web → Configurar, elige WordPress y copia Agent ID. Pega ese ID abajo. Es público; no necesitas una clave API."
 
-#. translators: %s: link to create an Andy account
 #, php-format
 msgid "No Andy account yet? %s"
 msgstr "¿Aún no tienes cuenta en Andy? %s"
 
-#. translators: %s: link to create an Andy account
 msgid "Create your Andy account"
 msgstr "Crea tu cuenta de Andy"
 
-#. translators: %s: this site's origin, for example https://example.com
+msgid "Already have Andy? Choose an existing Agent"
+msgstr "¿Ya tienes Andy? Elige un Agente existente"
+
 #, php-format
 msgid "If your Agent restricts Allowed Origins in Andy, that list must include this site: %s"
 msgstr "Si tu Agente restringe los Orígenes Permitidos (Allowed Origins) en Andy, esa lista debe incluir este sitio: %s"
@@ -118,52 +118,60 @@ msgstr "Si tu Agente restringe los Orígenes Permitidos (Allowed Origins) en And
 msgid "Letters, digits, hyphens and underscores only. Example: k2f9x0w4d7mqzn1vp8yc3rh6t5ejab0g"
 msgstr "Solo letras, dígitos, guiones y guiones bajos. Ejemplo: k2f9x0w4d7mqzn1vp8yc3rh6t5ejab0g"
 
-msgid "Access check"
-msgstr "Comprobar acceso"
-
 msgid "Check access from this site"
 msgstr "Comprobar el acceso desde este sitio"
 
-msgid "Asks Andy for the public configuration of the embed id above, from this browser, so the answer reflects the origin of this page. The request tells Andy it comes from this plugin, so Andy can count Agents connected through WordPress. Nothing is saved and no message is sent."
-msgstr "Pide a Andy la configuración pública del embed id de arriba, desde este navegador, para que la respuesta refleje el origen de esta página. La solicitud le indica a Andy que viene de este plugin, para que Andy pueda contar los Agentes conectados desde WordPress. No se guarda nada ni se envía ningún mensaje."
+msgid "Checks whether this browser can read the Agent's public configuration. It does not save settings, send a message or prove that the public widget has loaded. The request identifies this plugin for WordPress attribution."
+msgstr "Comprueba si este navegador puede leer la configuración pública del Agente. No guarda ajustes, envía mensajes ni demuestra que el widget público se haya cargado. La solicitud identifica este plugin para atribución de WordPress."
 
-msgid "Enter a valid embed id before checking: letters, digits, hyphens and underscores only."
-msgstr "Introduce un embed id válido antes de comprobar: solo letras, dígitos, guiones y guiones bajos."
+msgid "Add an Agent ID before checking access."
+msgstr "Añade un Agent ID antes de comprobar el acceso."
 
-#. translators: 1: embed id, 2: this site's origin, for example https://example.com
+msgid "Access has not been checked in this visit."
+msgstr "El acceso no se ha comprobado en esta visita."
+
+msgid "Access has not been checked for this Agent ID."
+msgstr "El acceso no se ha comprobado para este Agent ID."
+
+msgid "Enter a valid Agent ID before checking: letters, digits, hyphens and underscores only."
+msgstr "Introduce un Agent ID válido antes de comprobar: solo letras, dígitos, guiones y guiones bajos."
+
 #, php-format
 msgid "Checking %1$s from %2$s…"
 msgstr "Comprobando %1$s desde %2$s…"
 
-#. translators: 1: Agent name, 2: this site's origin, for example https://example.com
 #, php-format
-msgid "Success: Andy answered from %2$s with the configuration of the Agent \"%1$s\", so that origin is allowed to load it. Chats still need an active Andy plan."
-msgstr "Correcto: Andy respondió desde %2$s con la configuración del Agente \"%1$s\", así que ese origen tiene permiso para cargarlo. Los chats siguen necesitando un plan activo de Andy."
+msgid "Access allowed: Andy returned the configuration of Agent \"%1$s\" to %2$s. This is eligibility, not proof that the public widget has loaded. Chats still need an active Andy plan."
+msgstr "Acceso permitido: Andy devolvió la configuración del Agente \"%1$s\" a %2$s. Esto indica que tiene acceso, no demuestra que el widget público se haya cargado. El chat sigue necesitando un plan activo de Andy."
 
-#. translators: %s: the public site's origin, for example https://example.com
+msgid "The widget is off in your saved WordPress settings. Read the disclosure, enable it and save settings to show it."
+msgstr "El widget está desactivado en tus ajustes guardados de WordPress. Lee el aviso, actívalo y guarda los ajustes para mostrarlo."
+
+msgid "The widget is enabled in your saved WordPress settings. Open a public page to test it."
+msgstr "El widget está activado en tus ajustes guardados de WordPress. Abre una página pública para probarlo."
+
+msgid "This Agent ID has not been saved. Review the widget toggle and save settings after reading the disclosure."
+msgstr "Este Agent ID no se ha guardado. Revisa el interruptor del widget y guarda los ajustes después de leer el aviso."
+
 #, php-format
 msgid "Visitors load the widget from %s, which this check did not test. If the Agent restricts Allowed Origins, that origin must be on the list too."
 msgstr "Los visitantes cargan el widget desde %s, origen que esta comprobación no probó. Si el Agente restringe los Orígenes Permitidos, ese origen también debe estar en la lista."
 
-#. translators: %s: embed id
 #, php-format
-msgid "Andy answered that no Agent with embed id %s exists. Copy the id again from the Website Widget snippet of your Agent (Channels → Website Widget → Configure)."
-msgstr "Andy respondió que no existe ningún Agente con el embed id %s. Vuelve a copiar el id desde el fragmento de código del Widget de Sitio Web de tu Agente (Canales → Widget de Sitio Web → Configurar)."
+msgid "Andy found no Agent with ID %s. In Andy open Channels → Website Widget → Configure, choose WordPress and copy Agent ID again."
+msgstr "Andy no encontró ningún Agente con el ID %s. En Andy abre Canales → Widget de Sitio Web → Configurar, elige WordPress y vuelve a copiar Agent ID."
 
-#. translators: %s: HTTP status code
 #, php-format
 msgid "Andy answered with HTTP %s instead of the Agent's configuration. Try again in a few minutes. This is not an Allowed Origins problem."
 msgstr "Andy respondió con HTTP %s en lugar de la configuración del Agente. Inténtalo de nuevo en unos minutos. No es un problema de Orígenes Permitidos."
 
-msgid "Andy answered but did not let this browser read the reply. That happens when the embed id does not exist, or when the Agent restricts Allowed Origins and this site is not on the list."
-msgstr "Andy respondió, pero no dejó que este navegador leyera la respuesta. Eso ocurre cuando el embed id no existe o cuando el Agente restringe los Orígenes Permitidos y este sitio no está en la lista."
+msgid "Andy answered but did not let this browser read the reply. That happens when the Agent ID does not exist, or when the Agent restricts Allowed Origins and this site is not on the list."
+msgstr "Andy respondió, pero no dejó que este navegador leyera la respuesta. Esto ocurre cuando el Agent ID no existe, o cuando el Agente restringe los Orígenes Permitidos y este sitio no está en la lista."
 
-#. translators: %s: this site's origin, for example https://example.com
 #, php-format
-msgid "If the embed id matches the Andy App exactly, open your Agent in Andy, go to Settings → Security → Allowed Origins, add %s and check again."
-msgstr "Si el embed id coincide exactamente con el de la App de Andy, abre tu Agente en Andy, ve a Ajustes → Seguridad → Orígenes Permitidos, añade %s y vuelve a comprobar."
+msgid "If the Agent ID matches Andy exactly, open your Agent → Settings → Security → Allowed Origins, add %s and check again."
+msgstr "Si el Agent ID coincide exactamente con Andy, abre tu Agente → Ajustes → Seguridad → Orígenes Permitidos, añade %s y vuelve a comprobar."
 
-#. translators: %s: the public site's origin, for example https://example.com
 #, php-format
 msgid "Visitors use %s, so add that origin as well."
 msgstr "Los visitantes usan %s, así que añade también ese origen."
@@ -171,7 +179,6 @@ msgstr "Los visitantes usan %s, así que añade también ese origen."
 msgid "Could not reach app.andypartner.com from this browser. Check your internet connection or a content blocker. This says nothing about Allowed Origins."
 msgstr "No se pudo conectar con app.andypartner.com desde este navegador. Revisa tu conexión a internet o un bloqueador de contenido. Esto no dice nada sobre los Orígenes Permitidos."
 
-#. translators: %s: number of seconds waited
 #, php-format
 msgid "Andy did not answer within %s seconds, so the check was stopped. Try again. If it keeps happening, check your connection or a content blocker. This says nothing about Allowed Origins."
 msgstr "Andy no respondió en %s segundos, así que la comprobación se detuvo. Inténtalo de nuevo. Si se repite, revisa tu conexión o un bloqueador de contenido. Esto no dice nada sobre los Orígenes Permitidos."
@@ -188,14 +195,26 @@ msgstr "Déjalo desactivado hasta haber leído el aviso de arriba. Activar el pl
 msgid "You do not have permission to change Andy Partner settings."
 msgstr "No tienes permiso para cambiar los ajustes de Andy Partner."
 
-msgid "The Andy widget is on. Visitors see it on every public page."
-msgstr "El widget de Andy está activado. Los visitantes lo ven en todas las páginas públicas."
+msgid "Widget enabled in WordPress. Open a public page to verify that it loads and answers."
+msgstr "Widget activado en WordPress. Abre una página pública para comprobar que se carga y responde."
 
-msgid "The Andy widget is off. Paste your embed id to get started."
-msgstr "El widget de Andy está desactivado. Pega tu embed id para empezar."
+msgid "No Agent ID saved. The widget is off."
+msgstr "No hay ningún Agent ID guardado. El widget está desactivado."
 
-msgid "The Andy widget is off. Turn it on below when you are ready."
-msgstr "El widget de Andy está desactivado. Actívalo abajo cuando estés listo."
+msgid "Agent ID saved. The widget is off; check access before enabling it."
+msgstr "Agent ID guardado. El widget está desactivado; comprueba el acceso antes de activarlo."
+
+msgid "Connect your Andy Agent"
+msgstr "Conecta tu Agente de Andy"
+
+msgid "Create an Andy account or choose an existing Agent, then copy its Agent ID from the WordPress installation view. Activation alone never enables the widget."
+msgstr "Crea una cuenta de Andy o elige un Agente existente; después copia su Agent ID desde la vista de instalación de WordPress. Activar el plugin por sí solo nunca activa el widget."
+
+msgid "Choose an existing Agent"
+msgstr "Elige un Agente existente"
+
+msgid "I already have an Agent ID"
+msgstr "Ya tengo un Agent ID"
 
 msgid "Save settings"
 msgstr "Guardar ajustes"

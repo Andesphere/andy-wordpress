@@ -96,7 +96,8 @@
 		function render( response, data ) {
 			var chatbot = data && data.chatbot;
 			if ( response.ok && chatbot && typeof chatbot.id === 'string' && chatbot.id ) {
-				settle( 'success', format( config.text.success, [ chatbot.name || id, origin ] ) + otherOrigin( config.text.successOtherOrigin ) );
+				var state = id !== config.savedId ? config.text.unsavedId : config.enabled ? config.text.widgetOn : config.text.widgetOff;
+				settle( 'success', format( config.text.success, [ chatbot.name || id, origin ] ) + otherOrigin( config.text.successOtherOrigin ) + ' ' + state );
 			} else if ( 404 === response.status ) {
 				settle( 'error', format( config.text.notFound, [ id ] ) );
 			} else {
@@ -155,6 +156,6 @@
 	button.addEventListener( 'click', check );
 	input.addEventListener( 'input', function () {
 		endRun();
-		output.textContent = '';
+		show( 'info', input.value.trim() ? config.text.unchecked : config.text.noId );
 	} );
 } )();
