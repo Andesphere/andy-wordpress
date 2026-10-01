@@ -349,6 +349,7 @@ function andy_chat_render_settings_page(): void {
 				<h2><?php esc_html_e( 'Connect your Andy Agent', 'andy-chat' ); ?></h2>
 				<p><?php esc_html_e( 'Create an Andy account or choose an existing Agent, then copy its Agent ID from the WordPress installation view. Activation alone never enables the widget.', 'andy-chat' ); ?></p>
 				<p><a class="button button-primary" href="<?php echo esc_url( andy_chat_setup_url() ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Create your Andy account', 'andy-chat' ); ?></a> <a class="button button-secondary" href="<?php echo esc_url( andy_chat_setup_url( true ) ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Choose an existing Agent', 'andy-chat' ); ?></a></p>
+				<p><a href="#andy_chat_embed_id"><?php esc_html_e( 'I already have an Agent ID', 'andy-chat' ); ?></a></p>
 			</div>
 		<?php endif; ?>
 		<form action="options.php" method="post">

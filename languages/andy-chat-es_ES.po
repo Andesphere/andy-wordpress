@@ -213,5 +213,8 @@ msgstr "Crea una cuenta de Andy o elige un Agente existente; después copia su A
 msgid "Choose an existing Agent"
 msgstr "Elige un Agente existente"
 
+msgid "I already have an Agent ID"
+msgstr "Ya tengo un Agent ID"
+
 msgid "Save settings"
 msgstr "Guardar ajustes"

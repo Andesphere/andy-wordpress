@@ -39,210 +39,264 @@ msgstr ""
 msgid "https://andypartner.com/"
 msgstr ""
 
-#: includes/admin-page.php:34
-#: includes/admin-page.php:35
-#: includes/admin-page.php:296
+#: includes/admin-page.php:60
+msgid "Andy Partner is activated. Review your Agent ID and widget settings, then test a public page."
+msgstr ""
+
+#: includes/admin-page.php:60
+msgid "Open Andy Partner settings"
+msgstr ""
+
+#: includes/admin-page.php:71
+#: includes/admin-page.php:72
+#: includes/admin-page.php:345
 msgid "Andy Partner"
 msgstr ""
 
-#: includes/admin-page.php:49
+#: includes/admin-page.php:86
 msgid "Before you enable the widget"
 msgstr ""
 
-#: includes/admin-page.php:56
+#: includes/admin-page.php:93
 msgid "Connect your Agent"
 msgstr ""
 
-#: includes/admin-page.php:63
-msgid "Embed id"
+#: includes/admin-page.php:100
+msgid "Agent ID"
 msgstr ""
 
-#: includes/admin-page.php:72
+#: includes/admin-page.php:109
 msgid "Access check"
 msgstr ""
 
-#: includes/admin-page.php:80
+#: includes/admin-page.php:117
 msgid "Widget"
 msgstr ""
 
-#: includes/admin-page.php:97
+#: includes/admin-page.php:134
 msgid "Settings"
 msgstr ""
 
 #. translators: %s: hostname of the Andy service
-#: includes/admin-page.php:113
+#: includes/admin-page.php:150
 #, php-format
 msgid "When the widget is on, every public page of this site loads a script from %s, a service run by Andesphere. Nothing is sent while the widget is off."
 msgstr ""
 
-#: includes/admin-page.php:119
+#: includes/admin-page.php:156
 msgid "On page load the visitor's browser requests the widget script and your Agent's public configuration. Andy receives the visitor's IP address, browser details and this site's address as part of that request."
 msgstr ""
 
-#: includes/admin-page.php:120
+#: includes/admin-page.php:157
 msgid "When a visitor writes in the chat, the message text and a random conversation id are sent to Andy so your Agent can answer. The current widget release creates a new conversation id on every page load and keeps nothing in the visitor's browser between pages or visits. It sets no cookies."
 msgstr ""
 
-#: includes/admin-page.php:121
-msgid "Andy keeps conversations while the Agent and Workspace exist, or until you delete them in Andy. Andy may keep technical logs for security and debugging. This plugin stores nothing about visitors. Its only signal to Andy is that the access check below came from this plugin."
+#: includes/admin-page.php:158
+msgid "Andy keeps conversations while the Agent and Workspace exist, or until you delete them in Andy. Andy may keep technical logs for security and debugging. This plugin stores nothing about visitors. Account links share the public site URL and settings return when you open them; the access check identifies this plugin for attribution."
 msgstr ""
 
-#: includes/admin-page.php:122
+#: includes/admin-page.php:159
 msgid "Turning the widget off, or deactivating this plugin, stops the script on the next page load. It does not delete conversations already stored in Andy; manage those from the Andy App."
 msgstr ""
 
 #. translators: 1: privacy policy link, 2: terms link, 3: data retention policy link
-#: includes/admin-page.php:128
+#: includes/admin-page.php:165
 #, php-format
 msgid "Read the %1$s, the %2$s and the %3$s before enabling the widget."
 msgstr ""
 
-#: includes/admin-page.php:129
+#: includes/admin-page.php:166
 msgid "Andy privacy policy"
 msgstr ""
 
-#: includes/admin-page.php:130
+#: includes/admin-page.php:167
 msgid "terms of service"
 msgstr ""
 
-#: includes/admin-page.php:131
+#: includes/admin-page.php:168
 msgid "data retention and deletion policy"
 msgstr ""
 
-#: includes/admin-page.php:144
-msgid "In the Andy App open your Agent, go to Channels and click Configure on the Website Widget card. The value of embedId in the code snippet that opens is the public embed id. It is not a secret and no API key is needed."
+#: includes/admin-page.php:181
+msgid "In Andy open your Agent → Channels → Website Widget → Configure, choose WordPress and copy Agent ID. Paste that ID below. It is public; no API key is needed."
 msgstr ""
 
 #. translators: %s: link to create an Andy account
-#: includes/admin-page.php:150
+#: includes/admin-page.php:188
 #, php-format
 msgid "No Andy account yet? %s"
 msgstr ""
 
-#: includes/admin-page.php:151
+#: includes/admin-page.php:189
+#: includes/admin-page.php:351
 msgid "Create your Andy account"
 msgstr ""
 
+#: includes/admin-page.php:193
+msgid "Already have Andy? Choose an existing Agent"
+msgstr ""
+
 #. translators: %s: this site's origin, for example https://example.com
-#: includes/admin-page.php:159
+#: includes/admin-page.php:199
 #, php-format
 msgid "If your Agent restricts Allowed Origins in Andy, that list must include this site: %s"
 msgstr ""
 
-#: includes/admin-page.php:187
+#: includes/admin-page.php:227
 msgid "Letters, digits, hyphens and underscores only. Example: k2f9x0w4d7mqzn1vp8yc3rh6t5ejab0g"
 msgstr ""
 
-#: includes/admin-page.php:199
+#: includes/admin-page.php:240
 msgid "Check access from this site"
 msgstr ""
 
-#: includes/admin-page.php:200
-msgid "Asks Andy for the public configuration of the embed id above, from this browser, so the answer reflects the origin of this page. The request tells Andy it comes from this plugin, so Andy can count Agents connected through WordPress. Nothing is saved and no message is sent."
+#: includes/admin-page.php:241
+msgid "Checks whether this browser can read the Agent's public configuration. It does not save settings, send a message or prove that the public widget has loaded. The request identifies this plugin for WordPress attribution."
 msgstr ""
 
-#: includes/admin-page.php:233
-msgid "Enter a valid embed id before checking: letters, digits, hyphens and underscores only."
+#: includes/admin-page.php:242
+#: includes/admin-page.php:277
+msgid "Add an Agent ID before checking access."
 msgstr ""
 
-#. translators: 1: embed id, 2: this site's origin, for example https://example.com
-#: includes/admin-page.php:235
+#: includes/admin-page.php:242
+msgid "Access has not been checked in this visit."
+msgstr ""
+
+#: includes/admin-page.php:278
+msgid "Access has not been checked for this Agent ID."
+msgstr ""
+
+#: includes/admin-page.php:279
+msgid "Enter a valid Agent ID before checking: letters, digits, hyphens and underscores only."
+msgstr ""
+
+#. translators: 1: Agent ID, 2: this site's origin, for example https://example.com
+#: includes/admin-page.php:281
 #, php-format
 msgid "Checking %1$s from %2$s…"
 msgstr ""
 
 #. translators: 1: Agent name, 2: this site's origin, for example https://example.com
-#: includes/admin-page.php:237
+#: includes/admin-page.php:283
 #, php-format
-msgid "Success: Andy answered from %2$s with the configuration of the Agent \"%1$s\", so that origin is allowed to load it. Chats still need an active Andy plan."
+msgid "Access allowed: Andy returned the configuration of Agent \"%1$s\" to %2$s. This is eligibility, not proof that the public widget has loaded. Chats still need an active Andy plan."
+msgstr ""
+
+#: includes/admin-page.php:284
+msgid "The widget is off in your saved WordPress settings. Read the disclosure, enable it and save settings to show it."
+msgstr ""
+
+#: includes/admin-page.php:285
+msgid "The widget is enabled in your saved WordPress settings. Open a public page to test it."
+msgstr ""
+
+#: includes/admin-page.php:286
+msgid "This Agent ID has not been saved. Review the widget toggle and save settings after reading the disclosure."
 msgstr ""
 
 #. translators: %s: the public site's origin, for example https://example.com
-#: includes/admin-page.php:239
+#: includes/admin-page.php:288
 #, php-format
 msgid "Visitors load the widget from %s, which this check did not test. If the Agent restricts Allowed Origins, that origin must be on the list too."
 msgstr ""
 
-#. translators: %s: embed id
-#: includes/admin-page.php:241
+#. translators: %s: Agent ID
+#: includes/admin-page.php:290
 #, php-format
-msgid "Andy answered that no Agent with embed id %s exists. Copy the id again from the Website Widget snippet of your Agent (Channels → Website Widget → Configure)."
+msgid "Andy found no Agent with ID %s. In Andy open Channels → Website Widget → Configure, choose WordPress and copy Agent ID again."
 msgstr ""
 
 #. translators: %s: HTTP status code
-#: includes/admin-page.php:243
+#: includes/admin-page.php:292
 #, php-format
 msgid "Andy answered with HTTP %s instead of the Agent's configuration. Try again in a few minutes. This is not an Allowed Origins problem."
 msgstr ""
 
-#: includes/admin-page.php:244
-msgid "Andy answered but did not let this browser read the reply. That happens when the embed id does not exist, or when the Agent restricts Allowed Origins and this site is not on the list."
+#: includes/admin-page.php:293
+msgid "Andy answered but did not let this browser read the reply. That happens when the Agent ID does not exist, or when the Agent restricts Allowed Origins and this site is not on the list."
 msgstr ""
 
 #. translators: %s: this site's origin, for example https://example.com
-#: includes/admin-page.php:246
+#: includes/admin-page.php:295
 #, php-format
-msgid "If the embed id matches the Andy App exactly, open your Agent in Andy, go to Settings → Security → Allowed Origins, add %s and check again."
+msgid "If the Agent ID matches Andy exactly, open your Agent → Settings → Security → Allowed Origins, add %s and check again."
 msgstr ""
 
 #. translators: %s: the public site's origin, for example https://example.com
-#: includes/admin-page.php:248
+#: includes/admin-page.php:297
 #, php-format
 msgid "Visitors use %s, so add that origin as well."
 msgstr ""
 
-#: includes/admin-page.php:249
+#: includes/admin-page.php:298
 msgid "Could not reach app.andypartner.com from this browser. Check your internet connection or a content blocker. This says nothing about Allowed Origins."
 msgstr ""
 
 #. translators: %s: number of seconds waited
-#: includes/admin-page.php:251
+#: includes/admin-page.php:300
 #, php-format
 msgid "Andy did not answer within %s seconds, so the check was stopped. Try again. If it keeps happening, check your connection or a content blocker. This says nothing about Allowed Origins."
 msgstr ""
 
-#: includes/admin-page.php:252
+#: includes/admin-page.php:301
 msgid "The check failed inside this plugin before it could judge Andy's answer. Reload the page and try again. This says nothing about Allowed Origins."
 msgstr ""
 
-#: includes/admin-page.php:272
+#: includes/admin-page.php:321
 msgid "Show the Andy widget on every public page"
 msgstr ""
 
-#: includes/admin-page.php:274
+#: includes/admin-page.php:323
 msgid "Leave this off until you have read the disclosure above. Activating the plugin alone never loads the widget."
 msgstr ""
 
-#: includes/admin-page.php:283
+#: includes/admin-page.php:332
 msgid "You do not have permission to change Andy Partner settings."
 msgstr ""
 
-#: includes/admin-page.php:288
-msgid "The Andy widget is on. Visitors see it on every public page."
+#: includes/admin-page.php:337
+msgid "Widget enabled in WordPress. Open a public page to verify that it loads and answers."
 msgstr ""
 
-#: includes/admin-page.php:290
-msgid "The Andy widget is off. Paste your embed id to get started."
+#: includes/admin-page.php:339
+msgid "No Agent ID saved. The widget is off."
 msgstr ""
 
-#: includes/admin-page.php:292
-msgid "The Andy widget is off. Turn it on below when you are ready."
+#: includes/admin-page.php:341
+msgid "Agent ID saved. The widget is off; check access before enabling it."
 msgstr ""
 
-#: includes/admin-page.php:302
+#: includes/admin-page.php:349
+msgid "Connect your Andy Agent"
+msgstr ""
+
+#: includes/admin-page.php:350
+msgid "Create an Andy account or choose an existing Agent, then copy its Agent ID from the WordPress installation view. Activation alone never enables the widget."
+msgstr ""
+
+#: includes/admin-page.php:351
+msgid "Choose an existing Agent"
+msgstr ""
+
+#: includes/admin-page.php:352
+msgid "I already have an Agent ID"
+msgstr ""
+
+#: includes/admin-page.php:359
 msgid "Save settings"
 msgstr ""
 
 #: includes/settings.php:111
-msgid "That embed id is not valid, so nothing was changed. Copy it from the Website Widget snippet of your Agent in the Andy App (Channels → Website Widget → Configure): it only contains letters, digits, hyphens and underscores."
+msgid "That Agent ID is not valid, so nothing was changed. In Andy open Channels → Website Widget → Configure, choose WordPress and copy Agent ID. It only contains letters, digits, hyphens and underscores."
 msgstr ""
 
 #: includes/settings.php:121
-msgid "Enter your Agent's embed id before enabling the widget. The widget stays off."
+msgid "Enter your Agent ID before enabling the widget. The widget stays off."
 msgstr ""
 
 #: includes/settings.php:136
-msgid "Settings saved. The Andy widget is on for every public page."
+msgid "Settings saved. The widget is enabled in WordPress; open a public page to test it."
 msgstr ""
 
 #: includes/settings.php:137
