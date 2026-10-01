@@ -25,17 +25,17 @@ This plugin puts your Andy Partner agent on every public page of your WordPress 
 
 * The contact details of people who are interested, collected by the agent during the chat.
 * One inbox for your website, WhatsApp, Instagram and Slack conversations, when your plan includes those channels and you connect them in Andy Partner.
-* A setup that takes about two minutes: install, paste your widget's embed id, switch it on.
+* A setup that takes about two minutes: install, paste your Agent ID, switch it on.
 
 **How it works**
 
 1. Create your agent at [andypartner.com](https://andypartner.com/wordpress?utm_source=wordpress-org&utm_medium=listing&utm_campaign=andy-partner) and give it your website so it can learn about your business.
 2. Install this plugin and open Settings → Andy Partner.
-3. Paste the embed id of your agent, check access, and switch the widget on.
+3. Paste the Agent ID, check access, and switch the widget on.
 
 The agent, its knowledge, its look, its languages and billing are all managed in the Andy Partner app. The plugin is free. Andy Partner plans start at US$9 a month after a 14-day free trial.
 
-The plugin stores two values in your WordPress database: the embed id and whether the widget is on. It stores no API key, no secret, and nothing about your visitors.
+The plugin stores two values in your WordPress database: the Agent ID and whether the widget is on. It also keeps a short-lived post-activation notice flag. It stores no API key, no secret, and nothing about your visitors.
 
 Settings and messages are available in English and Spanish.
 
@@ -45,7 +45,8 @@ This plugin loads a script from Andy Partner, a service operated by Andesphere. 
 
 * On every public page load while the widget is on, the visitor's browser requests `https://app.andypartner.com/widget.js` and the public configuration of your agent from `https://app.andypartner.com/api`. Andy Partner receives the visitor's IP address, browser details and the address of your site as part of those requests.
 * When a visitor writes in the chat, the message text and a random conversation id are sent to Andy Partner so your agent can answer. The current widget release creates a new conversation id on every page load and keeps nothing in the visitor's browser between pages or visits. It sets no cookies.
-* When an administrator clicks "Check access from this site" on the settings page, the administrator's browser asks Andy Partner for the agent's public configuration and says the request comes from this plugin and which plugin version is installed. Andy Partner uses this to count agents connected through WordPress. Nothing about visitors is sent.
+* Opening a new-account or existing-account link sends the public site URL and the explicit settings return to Andy. No Agent ID, API key, admin nonce or token is included.
+* When an administrator clicks "Check access from this site" on the settings page, the administrator's browser asks Andy Partner for the agent's public configuration and says the request comes from this plugin and which plugin version is installed. This identifies WordPress access checks for attribution. It does not prove that the public widget has loaded. Nothing about visitors is sent.
 * Andy Partner keeps conversations while the agent and workspace exist, or until you delete them in Andy Partner. Technical logs may be kept for security and debugging.
 * Turning the widget off, or deactivating or deleting the plugin, stops the script on the next page load. It does not delete conversations already stored in Andy Partner; manage those from the Andy Partner app.
 
@@ -56,8 +57,8 @@ Policies: [privacy policy](https://andypartner.com/legal/privacy), [terms of ser
 1. In Plugins → Add New, search for "Andy Partner" and click Install Now. You can also upload the ZIP, or copy the `andy-chat` folder into `wp-content/plugins/`.
 2. Activate Andy Partner. Activation alone loads nothing from Andy Partner.
 3. Open Settings → Andy Partner and read the disclosure.
-4. In the Andy Partner app open your agent, go to Channels and click Configure on the Website Widget card. In the code snippet that opens, copy the value of `embedId` from `<AndyChat embedId="..." />`. That is the embed id.
-5. Paste the embed id and click "Check access from this site". The check asks Andy for the Agent's public configuration from your browser, using the origin of the admin page you are on. When your public site uses a different address, the result says so, because that origin is not tested. It sends no message.
+4. In Andy open your Agent → Channels → Website Widget → Configure, choose WordPress and copy Agent ID. You can also use the new-account or existing-account links in the plugin settings; they carry your WordPress admin language, public site URL and settings return.
+5. Paste the Agent ID and click "Check access from this site". The check asks Andy for the Agent's public configuration from your browser, using the origin of the admin page you are on. When your public site uses a different address, the result says so, because that origin is not tested. It sends no message.
 6. Tick "Show the Andy widget on every public page" and save.
 
 If your Agent restricts Allowed Origins in Andy, add your site's origin (for example `https://example.com`) to that list, otherwise the widget cannot load its configuration. The access check tells you when that is the likely cause and which origin to add.
@@ -70,7 +71,7 @@ The plugin is free. Your agent needs an Andy Partner plan: plans start at US$9 a
 
 = Do I need an Andy API key? =
 
-No. The embed id is public. It identifies the Agent, it grants no access to your Andy account.
+No. The Agent ID is public. It identifies the Agent, it grants no access to your Andy account.
 
 = Does the widget appear in wp-admin? =
 
@@ -82,7 +83,7 @@ Not in this version. The widget is either on for every public page or off.
 
 = The access check says Andy did not let the browser read the reply. What now? =
 
-Andy gives the same answer for an unknown embed id and for a site outside the Agent's Allowed Origins, and the browser cannot tell them apart. First compare the embed id with the `embedId` value in the Website Widget snippet of the Andy Partner app (Channels → Website Widget → Configure). If it matches, open the Agent's Settings → Security → Allowed Origins and add the origin shown in the message. A successful check confirms that the origin it ran from can load the Agent; chats still need an active Andy Partner plan.
+Andy gives the same answer for an unknown Agent ID and for a site outside the Agent's Allowed Origins, and the browser cannot tell them apart. First compare the Agent ID with the standalone Agent ID in Andy (Channels → Website Widget → Configure → WordPress). If it matches, open the Agent's Settings → Security → Allowed Origins and add the origin shown in the message. A successful check confirms that its origin can read the public configuration, not that the public widget has loaded; chats still need an active Andy Partner plan.
 
 = What happens when I deactivate the plugin? =
 
@@ -91,7 +92,7 @@ The widget stops loading immediately. Your saved settings stay in the database s
 == Screenshots ==
 
 1. Your Andy Partner agent answering a visitor on a WordPress site.
-2. Settings → Andy Partner: paste the embed id, check access and switch the widget on.
+2. Settings → Andy Partner: paste the Agent ID, check access and switch the widget on.
 
 == Changelog ==
 
